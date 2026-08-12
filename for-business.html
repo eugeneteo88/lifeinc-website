@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light only">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For Your Business — Employee Benefits &amp; Business Protection | Life Inc</title>
+<meta name="description" content="Employee benefits, group insurance, keyman and business-continuity cover, commercial insurance and corporate wellness for Singapore companies — from a team who looks after your people.">
+
+<style>
+  :root{
+    color-scheme:light;
+    --bg:#fffdf9; --ink:#2a221e; --muted:#71655d; --line:#f1eae1; --line2:#e7ddd0;
+    --red:#db3b34; --red-ink:#b5322b; --red-soft:#fceae5;
+    --blue:#b5322b;
+    --peach:#fdeadf; --sky:#fdefdd; --cream:#fbf2df; --mint:#fbe7e2; --lilac:#f8ebe3; --grey:#f5efe6;
+    --warm:#fdf7ef;
+    --r:22px;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.6;letter-spacing:-.011em}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  ::selection{background:var(--red);color:#fff}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:650;font-size:15px;padding:14px 28px;border-radius:980px;transition:transform .16s,filter .2s,box-shadow .2s,background .2s,border-color .2s;border:1.5px solid transparent;cursor:pointer;font-family:var(--sans)}
+  .btn.red{background:var(--red);color:#fff;box-shadow:0 12px 28px -12px rgba(212,35,47,.5)}
+  .btn.red:hover{transform:translateY(-2px);filter:brightness(1.04)}
+  .btn.ghost{border-color:var(--line2);color:var(--ink);background:#fff}
+  .btn.ghost:hover{border-color:var(--ink)}
+  .btn.white{background:#fff;color:var(--red-ink)}
+  .btn.white:hover{transform:translateY(-2px)}
+  .btn.line{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.5)}
+  .btn.line:hover{background:rgba(255,255,255,.24);transform:translateY(-2px)}
+  .btn.lg{padding:16px 34px;font-size:16px}
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+  .logo{font-weight:800;font-size:23px;letter-spacing:-.02em;color:var(--ink)}
+  .logo .r{color:inherit}
+  .demobar{background:#faf7f2;border-bottom:1px solid var(--line);text-align:center;font-size:12.5px;padding:8px 16px;color:#6b6257}
+  .demobar b{color:var(--ink)}
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .navin{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
+  .nlinks{display:flex;align-items:center;gap:28px;font-size:14.5px;font-weight:550;color:#4a525d}
+  .nlinks a:hover,.nlinks a.on{color:var(--red)}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .nav .btn{padding:11px 22px;font-size:14px}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+  .burger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .22s,opacity .2s}
+  .burger.x span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.x span:nth-child(2){opacity:0}
+  .burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mobmenu{display:none;background:#fff;border-top:1px solid var(--line);padding:6px 24px 18px}
+  .mobmenu.open{display:block}
+  .mobmenu a{display:block;padding:14px 2px;font-size:16px;font-weight:600;color:var(--ink);border-bottom:1px solid var(--line)}
+  .mobmenu a:last-child{border-bottom:0}
+  .mobmenu .mm-cta{color:var(--red);font-weight:750}
+  .mobmenu .mm-wa{color:#25663f}
+  @media(min-width:901px){.mobmenu{display:none!important}}
+
+
+  /* services hero — full-bleed, home style */
+  .hero{padding:20px 0 0}
+  .herobox{position:relative;border-radius:28px;overflow:hidden;min-height:460px;display:flex;flex-direction:column;justify-content:flex-end}
+  .herobox .imgph{position:absolute;inset:0;background:linear-gradient(120deg,#b87a63,#caa079)}
+  .herobox .imgph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 44%}
+  .herobox .scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,16,22,.76) 0%,rgba(18,16,22,.4) 40%,rgba(18,16,22,0) 66%)}
+  .htop{position:relative;z-index:3;color:#fff;padding:0 50px;max-width:600px}
+  .herobox .htag{align-self:flex-start;display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:650;letter-spacing:.01em;color:#fff;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:980px;padding:8px 16px;margin-bottom:20px}
+  .htop .crumb a:hover{color:#fff;text-decoration:underline}
+  .herobox h1{font-size:clamp(32px,4.6vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1.04;text-wrap:balance;color:#fff}
+  .herobox h1 span{color:#fff}
+  .hbot{position:relative;z-index:3;color:#fff;padding:16px 50px 50px;max-width:560px}
+  .hbot p{font-size:clamp(16px,1.5vw,19px);color:#f0eef0;max-width:52ch;line-height:1.6}
+  .hbot .hcta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+  /* image placeholders */
+  .imgph .pn{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.5);color:#fff;font-size:11px;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:980px;font-family:ui-monospace,Menlo,monospace;z-index:3}
+  .imgph .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#f3e7de;padding:14px;z-index:1}
+  .imgph .pl span{font-size:12.5px;font-weight:600;max-width:24ch;line-height:1.4}
+
+  section{padding:80px 0}
+  .h-cent{text-align:center;max-width:660px;margin:0 auto 8px}
+  .h-cent .kk{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+  .h-cent h2{font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.08;text-wrap:balance}
+  .h-cent p{color:var(--muted);font-size:17px;margin-top:12px}
+
+  .bento{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:46px}
+  .card{border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,box-shadow .2s;background:#fff;border:1px solid var(--line)}
+  .card:hover{transform:translateY(-5px);box-shadow:0 30px 56px -32px rgba(20,35,61,.3)}
+  .card .imgph{position:relative;height:180px;background:linear-gradient(135deg,#f6ddce,#efe4d6 70%);overflow:hidden}
+  .card .imgph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .card .ic{width:46px;height:46px;border-radius:13px;background:#fff;display:grid;place-items:center;font-size:22px;box-shadow:0 6px 16px -8px rgba(0,0,0,.15);position:absolute;left:22px;top:-23px;z-index:2}
+  .card .cb{padding:28px 24px 24px;position:relative}
+  .card.noimg .cb{padding-top:36px}
+  .card.noimg{background:var(--cream)}
+  .card h3{font-size:19px;font-weight:750;color:var(--ink)}
+  .card p{font-size:14px;color:#54606c;margin-top:8px;line-height:1.55;flex:1}
+  .card ul{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px}
+  .card ul li{font-size:13px;color:#54606c;display:flex;gap:8px;align-items:flex-start}
+  .card ul li::before{content:"✓";color:var(--red);font-weight:800;font-size:12px}
+  .card .more{margin-top:14px;font-size:14px;font-weight:650;color:var(--blue);display:inline-block}
+
+  .cat{padding-bottom:20px}
+  .cat.biz{background:var(--warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:80px 0}
+  .bento.b4{grid-template-columns:repeat(2,1fr)}
+
+  /* mid strip */
+  .strip{background:linear-gradient(120deg,#fff,var(--cream));border:1px solid var(--line);border-radius:var(--r);padding:34px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin:0 auto}
+  .strip h3{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+  .strip p{color:var(--muted);font-size:15px;margin-top:4px}
+
+  /* process */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:46px}
+  .stp{text-align:center}
+  .stp .n{width:56px;height:56px;border-radius:50%;background:#fff;border:1.5px solid var(--red-soft);color:var(--red);font-weight:800;font-size:20px;display:grid;place-items:center;margin:0 auto 16px;box-shadow:0 10px 22px -14px rgba(212,35,47,.4)}
+  .stp h4{font-size:17px;font-weight:750;margin-bottom:7px}
+  .stp p{font-size:13.5px;color:var(--muted);line-height:1.55;max-width:22ch;margin:0 auto}
+
+  .cta{padding:34px 0 92px}
+  .ctabox{background:linear-gradient(120deg,#db3b34,#ef7a52);border-radius:28px;padding:60px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
+  .ctabox::after{content:"";position:absolute;inset:0;background:radial-gradient(400px 240px at 85% 20%,rgba(255,255,255,.16),transparent 60%)}
+  .ctabox>*{position:relative;z-index:2}
+  .ctabox h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+  .ctabox p{font-size:18px;color:#ffe1e3;margin:14px auto 28px;max-width:44ch}
+  .ctabox .hcta{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+  .ctabox .btn.line{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.5)}
+
+  footer{background:#101f38;color:#9fb0c6;padding:56px 0 32px;font-size:14px}
+  .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1.2fr;gap:40px}
+  .fgrid .logo{color:#fff}.fgrid .logo .r{color:inherit}
+  footer h5{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6f83a0;margin-bottom:14px;font-weight:700}
+  footer a.fl{display:block;margin-bottom:9px;color:#9fb0c6}footer a.fl:hover{color:#fff}
+  .fdesc{color:#8497b2;margin-top:14px;font-size:13.5px;line-height:1.6;max-width:36ch}
+  .disc-foot{border-top:1px solid rgba(255,255,255,.1);margin-top:40px;padding-top:22px;font-size:11.5px;color:#6f83a0;line-height:1.6}
+
+  @media(max-width:900px){
+    .nlinks,.nav-cta .btn.ghost,.nav-cta .btn.red{display:none}.burger{display:flex}
+    .sgrid{grid-template-columns:1fr;gap:32px;padding:44px 0}
+    .bento{grid-template-columns:1fr 1fr}.bento.b4{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr 1fr;gap:30px}
+    .fgrid{grid-template-columns:1fr;gap:26px}
+    .strip{flex-direction:column;align-items:flex-start;text-align:left}
+  }
+  @media(max-width:760px){
+    .hero{padding:16px 0 0}
+    .herobox{display:block;min-height:0;border-radius:22px;background:var(--warm);border:1px solid var(--line)}
+    .herobox .imgph{position:relative;inset:auto;height:340px}
+    .herobox .imgph>img{object-position:center 30%}
+    .herobox .scrim{top:0;bottom:auto;height:340px;background:linear-gradient(0deg,rgba(18,16,22,.82) 0%,rgba(18,16,22,.2) 34%,transparent 56%)}
+    .htop{position:absolute;top:0;left:0;right:0;height:340px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 22px 22px;max-width:none;z-index:4}
+    .htop h1{font-size:30px}
+    .hbot{position:relative;z-index:3;color:var(--ink);padding:22px 22px 10px;max-width:none}
+    .hbot p{color:var(--muted)}
+    .hbot .hcta{margin-top:18px;flex-direction:column;align-items:stretch}
+    .hbot .btn.white{background:var(--red);color:#fff}
+    .hbot .btn.line{color:var(--ink);border-color:var(--line2);background:#fff}
+  }
+  @media(max-width:560px){.bento,.bento.b4{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="demobar">Concept redesign of <b>lifeinc.com.sg</b> — designed &amp; built by <a href="https://heyada.io" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline"><b>HeyAda</b></a>.</div>
+
+<header class="nav"><div class="wrap navin">
+  <a class="logo" href="/index.html">Life <span class="r">Inc</span></a>
+  <nav class="nlinks">
+    <a href="/index.html">Home</a><a href="/for-you.html">For you</a><a href="/for-business.html" class="on">For business</a><a href="/life-stages.html">Life stages</a><a href="/contact.html">Contact</a>
+  </nav>
+  <div class="nav-cta">
+    <a class="btn ghost" href="https://wa.me/6598538609" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn red" href="/contact.html">Book a review</a>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</div>
+  <div class="mobmenu" id="mobmenu">
+    <a href="/index.html">Home</a>
+    <a href="/for-you.html">For you</a>
+    <a href="/for-business.html">For business</a>
+    <a href="/life-stages.html">Life stages</a><a href="/contact.html">Contact</a>
+    <a class="mm-cta" href="/contact.html">Book a review &rarr;</a>
+    <a class="mm-wa" href="https://wa.me/6598538609" target="_blank" rel="noopener">WhatsApp +65 9853 8609</a>
+  </div>
+</header>
+
+
+<!-- HERO -->
+<section class="hero"><div class="wrap">
+  <div class="herobox">
+    <div class="imgph"><img src="/assets/b1.jpg" alt="A business team looked after by Life Inc"></div>
+    <div class="scrim"></div>
+    <div class="htop">
+      <span class="htag">For business</span>
+      <h1>Look after your people, <span>protect what you've built</span>.</h1>
+    </div>
+    <div class="hbot">
+      <p>Employee benefits and business protection that help you attract, retain and safeguard your team — placed across Great Eastern and trusted insurers.</p>
+      <div class="hcta">
+        <a class="btn white lg" href="#book">Talk to us →</a>
+        <a class="btn line lg" href="/for-you.html">For individuals →</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- BUSINESS -->
+<section class="cat" id="business"><div class="wrap">
+  <div class="h-cent rv"><div class="kk">For your business</div><h2>Cover that keeps your business — and its people — secure.</h2><p>From your team's benefits to the risks that could stop you overnight, we help you plan it properly.</p></div>
+  <div class="bento b4">
+    <div class="card rv"><div class="imgph"><img src="/assets/p9.jpg" alt="A team at work"></div><div class="cb"><h3>Employee benefits &amp; group insurance</h3><p>Group medical, life and dental cover that makes your company a place people want to stay.</p><ul><li>Group hospitalisation &amp; surgical</li><li>Group term life &amp; personal accident</li><li>Outpatient &amp; dental</li></ul></div></div>
+    <div class="card rv"><div class="imgph"><img src="/assets/p7.jpg" alt="A business owner"></div><div class="cb"><h3>Business continuity &amp; keyman</h3><p>Protect the business if a key person is lost — so operations, partners and families stay secure.</p><ul><li>Keyman insurance</li><li>Buy-sell / partnership cover</li><li>Business loan protection</li></ul></div></div>
+    <div class="card rv"><div class="imgph"><img src="/assets/s2.jpg" alt="A Singapore heartland shop owner"></div><div class="cb"><h3>Commercial &amp; general insurance</h3><p>The everyday cover a business needs — placed across trusted insurers to fit your operations.</p><ul><li>Public liability &amp; property</li><li>Work injury compensation</li><li>Professional indemnity</li></ul></div></div>
+    <div class="card rv"><div class="imgph"><img src="/assets/s3.jpg" alt="A workplace wellness session"></div><div class="cb"><h3>Corporate wellness</h3><p>Talks and programmes that keep your team healthy, engaged and financially confident.</p><ul><li>Financial-wellness talks</li><li>Health &amp; protection clinics</li><li>Numerology &amp; mindset sessions</li></ul></div></div>
+  </div>
+</div></section>
+
+<!-- MID STRIP -->
+<section style="padding:0 0 20px"><div class="wrap"><div class="strip rv">
+  <div><h3>Want to look after your team?</h3><p>Let's talk through your headcount and goals, and shape a benefits plan that fits your budget.</p></div>
+  <a class="btn red lg" href="#book">Talk to us →</a>
+</div></div></section>
+
+<!-- HOW WE WORK -->
+<section id="how"><div class="wrap">
+  <div class="h-cent rv"><div class="kk">How we work</div><h2>A dependable process, not a hard sell.</h2><p>No jargon, no pressure — just a clear plan you understand and revisit as life moves.</p></div>
+  <div class="steps">
+    <div class="stp rv"><div class="n">1</div><h4>Understand</h4><p>We listen first — your goals, your family or business, where you are today.</p></div>
+    <div class="stp rv"><div class="n">2</div><h4>Review</h4><p>We map what you already have and find the gaps and overlaps you can't see.</p></div>
+    <div class="stp rv"><div class="n">3</div><h4>Plan</h4><p>A clear, right-sized plan using solutions from Great Eastern and trusted insurers.</p></div>
+    <div class="stp rv"><div class="n">4</div><h4>Stay with you</h4><p>We review together as life changes — new home, baby, business.</p></div>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta" id="book"><div class="wrap"><div class="ctabox rv">
+  <h2>Let's see where you really stand.</h2>
+  <p>Book your free 30-minute review — no pressure, no jargon. Just a clear picture of your protection and what to do next.</p>
+  <div class="hcta">
+    <a class="btn white lg" href="https://wa.me/6598538609?text=Hi%20Life%20Inc%2C%20I'd%20like%20to%20book%20a%20free%2030-minute%20review." target="_blank" rel="noopener">Book my free review →</a>
+    <a class="btn line lg" href="https://wa.me/6598538609" target="_blank" rel="noopener">WhatsApp +65 9853 8609</a>
+  </div>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div>
+      <a class="logo" href="/index.html">Life <span class="r">Inc</span></a>
+      <p class="fdesc">A Singapore team of financial advisers representing Great Eastern Financial Advisers Pte Ltd. Securing your financial freedom since 2018.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <a class="fl" href="/for-you.html">For you</a><a class="fl" href="/for-business.html">For business</a><a class="fl" href="/life-stages.html">Life stages</a><a class="fl" href="/contact.html">Contact</a>
+    </div>
+    <div>
+      <h5>Get in touch</h5>
+      <a class="fl" href="#book">Great Eastern House, 49 Beach Road #03-01</a><a class="fl" href="tel:+6598538609">+65 9853 8609</a><a class="fl" href="mailto:hello@lifeinc.com.sg">hello@lifeinc.com.sg</a><a class="fl" href="https://www.instagram.com/lifeincsg/" target="_blank" rel="noopener">Instagram @lifeincsg</a>
+    </div>
+  </div>
+  <div class="disc-foot">
+    Life Inc is a team of financial representatives of Great Eastern Financial Advisers Pte Ltd. Information here is general only and does not constitute financial advice; please seek advice from a licensed representative before deciding. Insurance products are subject to terms and conditions. &nbsp;·&nbsp; Concept demo by HeyAda — not the live Life Inc website.
+  </div>
+</div></footer>
+
+<script>
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.rv'));
+  function reveal(el){el.classList.add('in');}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}})},{threshold:0,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){io.observe(el);});
+    window.addEventListener('load',function(){var h=window.innerHeight||0;els.forEach(function(el){if(el.getBoundingClientRect().top<h){reveal(el);}});});
+  } else { els.forEach(reveal); }
+  var _b=document.getElementById('burger'),_m=document.getElementById('mobmenu');if(_b&&_m){_b.addEventListener('click',function(){_m.classList.toggle('open');_b.classList.toggle('x');});}
+})();
+</script>
+</body>
+</html>
