@@ -2,8 +2,17 @@
 <title>Pet Care Check · Life Inc</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#fffdf9">
-<meta property="og:title" content="Pet Care Check — Life Inc">
-<meta property="og:description" content="A quick 40-second Pet Care Check from your Life Inc advisers.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lifeinc.com.sg/pet">
+<meta property="og:title" content="Free Pet Care Check — Life Inc">
+<meta property="og:description" content="A 40-second check for pet owners — get a personalised pet-care summary from your Life Inc advisers.">
+<meta property="og:image" content="https://lifeinc.com.sg/assets/og-pet.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Pet Care Check — Life Inc">
+<meta name="twitter:description" content="A 40-second check for pet owners.">
+<meta name="twitter:image" content="https://lifeinc.com.sg/assets/og-pet.jpg">
 <style>
 :root{
   --ink:#2a221e;--soft:#71655d;--line:#efe6da;--bg:#fffdf9;--paper:#fff;
@@ -35,10 +44,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
 .qsub{color:var(--soft);font-size:14px;margin:0 0 18px}
 .opts{display:grid;gap:10px}
 .opts.two{grid-template-columns:1fr 1fr}
-.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px 16px;font:inherit;font-weight:650;color:var(--ink);cursor:pointer;transition:.14s}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px 16px;font:inherit;font-weight:650;color:var(--ink);cursor:pointer;transition:border-color .14s,background .14s;-webkit-tap-highlight-color:transparent}
 .opt .em{font-size:22px;line-height:1}
-.opt:hover{border-color:#e2d5c4;transform:translateY(-1px)}
-.opt.sel{border-color:var(--red);background:var(--red-soft);box-shadow:0 0 0 3px rgba(219,59,52,.13)}
+.opt:hover{border-color:#e2d5c4}
+.opt.sel{border-color:var(--red);background:var(--red-soft)}
+.otherin{width:100%;font:inherit;font-size:16px;border:2px solid var(--line);border-radius:14px;padding:14px 16px;color:var(--ink);background:#fff;outline:none}
+.otherin:focus{border-color:var(--red)}
 .opt.sel::after{content:"✓";margin-left:auto;color:var(--red-d);font-weight:900}
 .opts.two .opt{justify-content:center;text-align:center}
 .cont{margin-top:18px;width:100%;border:none;border-radius:14px;background:var(--red);color:#fff;font:inherit;font-weight:800;font-size:16px;padding:15px;cursor:pointer;box-shadow:0 10px 22px -10px rgba(219,59,52,.7);transition:.14s}
@@ -157,6 +168,10 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
             <button class="opt" data-v="Other">Other</button>
             <button class="opt" data-v="Not sure">Not sure</button>
           </div>
+          <div class="sub" id="otherSub">
+            <input id="otherInput" class="otherin" type="text" placeholder="Type the insurer's name" style="margin-top:10px">
+            <button class="cont" id="otherCont" type="button">Continue →</button>
+          </div>
         </div>
         <button class="back" data-back>← Back</button>
       </div>
@@ -242,7 +257,11 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
         if(b.dataset.v==='Yes'){s.classList.add('show'); return;}
         else{s.classList.remove('show'); data.insco='';}
       }
-      if(key==='insco'){ setTimeout(function(){show(cur+1);},220); return; }
+      if(key==='insco'){
+        var os=document.getElementById('otherSub');
+        if(b.dataset.v==='Other'){ os.classList.add('show'); var oi=document.getElementById('otherInput'); setTimeout(function(){oi.focus();},60); return; }
+        os.classList.remove('show'); setTimeout(function(){show(cur+1);},220); return;
+      }
       if(grp.hasAttribute('data-reveal') && b.dataset.v!=='Yes'){ setTimeout(function(){show(cur+1);},220); return; }
       if(!grp.hasAttribute('data-reveal')){ setTimeout(function(){show(cur+1);},220); }
     });
@@ -259,6 +278,8 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
   });
   document.querySelectorAll('[data-next]').forEach(function(btn){ btn.addEventListener('click',function(){show(cur+1);}); });
   document.querySelectorAll('[data-back]').forEach(function(btn){ btn.addEventListener('click',function(){show(Math.max(0,cur-1));}); });
+  var oc=document.getElementById('otherCont');
+  if(oc) oc.addEventListener('click',function(){ var v=(document.getElementById('otherInput').value||'').trim(); data.insco=v||'Other'; show(cur+1); });
 
   // consent date — auto, Singapore time (DD/MM/YYYY)
   (function(){
