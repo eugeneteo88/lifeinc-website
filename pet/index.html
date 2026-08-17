@@ -1,0 +1,318 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pet Care Check · Life Inc</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#fffdf9">
+<meta property="og:title" content="Pet Care Check — Life Inc">
+<meta property="og:description" content="A quick 40-second Pet Care Check from your Life Inc advisers.">
+<style>
+:root{
+  --ink:#2a221e;--soft:#71655d;--line:#efe6da;--bg:#fffdf9;--paper:#fff;
+  --red:#db3b34;--red-d:#b5322b;--red-soft:#fdeadf;--gold:#e0a53a;--good:#2f9e63;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;padding:18px 16px 40px;min-height:100vh}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:0 24px 60px -34px rgba(60,40,30,.4);overflow:hidden}
+
+/* --- top banner (illustration + text overlay) --- */
+.banner{position:relative;overflow:hidden;background:#fbeede;line-height:0}
+.bimg{display:block;width:100%;height:auto}
+.bover{position:absolute;top:0;left:0;bottom:0;width:66%;padding:0 18px;display:flex;flex-direction:column;justify-content:center;line-height:1.2;background:linear-gradient(90deg,rgba(252,239,224,.94) 40%,rgba(252,239,224,.42) 60%,transparent 80%)}
+.brow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.blogo{font-weight:800;font-size:clamp(15px,4.6vw,21px);letter-spacing:-.02em;color:var(--ink)}
+.blogo b{color:var(--red)}
+.bbadge{background:var(--red);color:#fff;font-size:clamp(8.5px,2.4vw,11px);font-weight:800;letter-spacing:.04em;padding:4px 9px;border-radius:99px;text-transform:uppercase;white-space:nowrap}
+.bh1{font-size:clamp(14px,4.5vw,22px);font-weight:800;letter-spacing:-.02em;line-height:1.16;margin:8px 0 0;color:var(--ink)}
+.bh1 span{color:var(--red-d)}
+
+.head{padding:14px 22px 12px;border-bottom:1px solid var(--line)}
+.pbar{height:7px;border-radius:99px;background:#f2ebe1;overflow:hidden}
+.pbar > i{display:block;height:100%;width:12%;background:linear-gradient(90deg,var(--red),#f0716a);border-radius:99px;transition:width .35s cubic-bezier(.4,1,.4,1)}
+.pmeta{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);font-weight:600;margin-top:7px}
+.body{padding:24px 22px 26px}
+.q{font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:0 0 4px}
+.qsub{color:var(--soft);font-size:14px;margin:0 0 18px}
+.opts{display:grid;gap:10px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px 16px;font:inherit;font-weight:650;color:var(--ink);cursor:pointer;transition:.14s}
+.opt .em{font-size:22px;line-height:1}
+.opt:hover{border-color:#e2d5c4;transform:translateY(-1px)}
+.opt.sel{border-color:var(--red);background:var(--red-soft);box-shadow:0 0 0 3px rgba(219,59,52,.13)}
+.opt.sel::after{content:"✓";margin-left:auto;color:var(--red-d);font-weight:900}
+.opts.two .opt{justify-content:center;text-align:center}
+.cont{margin-top:18px;width:100%;border:none;border-radius:14px;background:var(--red);color:#fff;font:inherit;font-weight:800;font-size:16px;padding:15px;cursor:pointer;box-shadow:0 10px 22px -10px rgba(219,59,52,.7);transition:.14s}
+.cont:hover{background:var(--red-d)}
+.cont[disabled]{opacity:.4;cursor:not-allowed;box-shadow:none}
+.back{background:none;border:none;color:var(--soft);font:inherit;font-weight:700;font-size:14px;padding:8px 2px;margin-top:10px;cursor:pointer}
+.back:hover{color:var(--ink)}
+.sub{margin-top:14px;display:none}
+.sub.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+.screen{display:none}.screen.active{display:block;animation:fade .28s ease}
+
+/* --- consent step (our style, GE copy) --- */
+.cintro{margin:0 0 16px}
+.ctitle{font-size:21px;font-weight:800;letter-spacing:-.02em;line-height:1.22;margin:0 0 10px;color:var(--ink)}
+.cintro p{font-size:13.5px;color:var(--soft);margin:0 0 9px;line-height:1.5}
+.cintro p:last-child{margin-bottom:0}
+.gefield{border:1.5px solid var(--line);border-radius:12px;padding:9px 14px;margin-bottom:11px;background:#fff}
+.gefield label{display:block;font-size:12.5px;color:var(--soft);margin-bottom:1px}
+.gefield input{border:none;outline:none;width:100%;font:inherit;font-size:16px;background:transparent;color:var(--ink);padding:2px 0}
+.gefield:focus-within{border-color:var(--red);box-shadow:0 0 0 3px rgba(219,59,52,.12)}
+.gefield input[readonly]{color:#8c8175}
+.req{color:var(--red)}
+.gechannels{margin:16px 0 4px}
+.gclabel{font-size:13.5px;color:var(--soft);margin-bottom:11px}
+.gcgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px 14px}
+.gcbox{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--ink);cursor:pointer;line-height:1.35}
+.gcbox input{margin-top:2px;width:18px;height:18px;flex:none;accent-color:var(--red)}
+.gedate{margin:16px 0 4px;font-size:13.5px;color:var(--soft)}
+.gedate b{color:var(--ink);font-weight:700}
+.geprivacy{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.geprivacy p{font-size:12px;color:var(--soft);margin:0 0 7px;line-height:1.55}
+.geprivacy a{color:var(--red-d);font-weight:600;word-break:break-word}
+.done{text-align:center;padding:20px 8px 8px}
+.done .big{width:74px;height:74px;border-radius:50%;background:var(--good);color:#fff;display:grid;place-items:center;font-size:38px;margin:8px auto 16px}
+.done h2{font-size:24px;font-weight:800;margin:0 0 8px}
+.done p{color:var(--soft);margin:0 auto;max-width:34ch}
+.foot{text-align:center;color:#b3a99d;font-size:11.5px;margin-top:16px}
+.foot b{color:#8c8175;font-weight:700}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="card">
+
+    <div class="banner">
+      <img class="bimg" src="/assets/lifeinc-pet-banner.png" alt="Life Inc Pet Guardian — happy pets under a protective shield">
+      <div class="bover">
+        <div class="brow"><span class="blogo">Life <b>Inc</b></span><span class="bbadge">🐾 Pet Guardian</span></div>
+        <h1 class="bh1">Your pet is <span>family.</span></h1>
+      </div>
+    </div>
+
+    <div class="head">
+      <div class="pbar"><i id="bar"></i></div>
+      <div class="pmeta"><span id="pnum">Question 1 of 4</span><span>~40 seconds</span></div>
+    </div>
+
+    <div class="body">
+
+      <!-- Q1 pet type (multi) -->
+      <div class="screen active" data-step="0">
+        <h1 class="q">What pet do you have? 🐾</h1>
+        <p class="qsub">Pick all that apply — many owners have more than one.</p>
+        <div class="opts two" data-multi="pet">
+          <button class="opt" data-v="Dog"><span class="em">🐶</span>Dog</button>
+          <button class="opt" data-v="Cat"><span class="em">🐱</span>Cat</button>
+          <button class="opt" data-v="Rabbit"><span class="em">🐰</span>Rabbit</button>
+          <button class="opt" data-v="Small pet"><span class="em">🐹</span>Small pet</button>
+          <button class="opt" data-v="Bird"><span class="em">🐦</span>Bird</button>
+          <button class="opt" data-v="Fish"><span class="em">🐠</span>Fish</button>
+          <button class="opt" data-v="Reptile"><span class="em">🦎</span>Reptile</button>
+          <button class="opt" data-v="Other"><span class="em">🐾</span>Other</button>
+        </div>
+        <button class="cont" data-next disabled>Continue →</button>
+      </div>
+
+      <!-- Q2 spend -->
+      <div class="screen" data-step="1">
+        <h1 class="q">Roughly how much do you spend on them each month?</h1>
+        <div class="opts" data-single="spend">
+          <button class="opt" data-v="Under $50"><span class="em">💵</span>Under $50</button>
+          <button class="opt" data-v="$50 – $150"><span class="em">💵</span>$50 – $150</button>
+          <button class="opt" data-v="$150 – $300"><span class="em">💰</span>$150 – $300</button>
+          <button class="opt" data-v="$300 – $600"><span class="em">💰</span>$300 – $600</button>
+          <button class="opt" data-v="$600+"><span class="em">🏦</span>$600 or more</button>
+        </div>
+        <button class="back" data-back>← Back</button>
+      </div>
+
+      <!-- Q3 funding -->
+      <div class="screen" data-step="2">
+        <h1 class="q">How do you usually fund these costs?</h1>
+        <div class="opts" data-single="funding">
+          <button class="opt" data-v="Everyday income"><span class="em">💼</span>Everyday income</button>
+          <button class="opt" data-v="Savings"><span class="em">🐖</span>Savings</button>
+          <button class="opt" data-v="Credit card"><span class="em">💳</span>Credit card</button>
+          <button class="opt" data-v="It varies / not sure"><span class="em">🤔</span>It varies / not sure</button>
+        </div>
+        <button class="back" data-back>← Back</button>
+      </div>
+
+      <!-- Q4 insurance -->
+      <div class="screen" data-step="3">
+        <h1 class="q">Do you have pet insurance?</h1>
+        <div class="opts two" data-single="hasins" data-reveal>
+          <button class="opt" data-v="No, not yet"><span class="em">🚫</span>Not yet</button>
+          <button class="opt" data-v="Yes"><span class="em">✅</span>Yes, I do</button>
+        </div>
+        <div class="sub" id="insSub">
+          <p class="qsub" style="margin:16px 0 8px">Which company?</p>
+          <div class="opts two" data-single="insco">
+            <button class="opt" data-v="Income">Income</button>
+            <button class="opt" data-v="MSIG">MSIG</button>
+            <button class="opt" data-v="Liberty">Liberty</button>
+            <button class="opt" data-v="AIA">AIA</button>
+            <button class="opt" data-v="Other">Other</button>
+            <button class="opt" data-v="Not sure">Not sure</button>
+          </div>
+        </div>
+        <button class="back" data-back>← Back</button>
+      </div>
+
+      <!-- Consent (our design, GE copy + fields) -->
+      <div class="screen" data-step="4">
+        <div class="cintro">
+          <h1 class="ctitle">Marketing Consent to stay in touch with Great Eastern</h1>
+          <p>Be the first to know about exclusive promotions, offers, customer rewards and/or product offerings from Great Eastern, its related corporations, business partners and our respective Financial Representatives.</p>
+          <p>By submitting this form, you agree to receive marketing updates from us through your preferred contact channel(s).</p>
+        </div>
+        <form id="lead" novalidate>
+          <div class="gefield"><label>Your name <span class="req">*</span> (as in NRIC/Passport)</label><input name="name" type="text" required></div>
+          <div class="gefield"><label>Email address <span class="req">*</span></label><input name="email" type="email" required></div>
+          <div class="gefield"><label>Mobile number <span class="req">*</span></label><input name="mobile" type="tel" inputmode="numeric" required></div>
+          <div class="gefield"><label>Home number (optional)</label><input name="home" type="tel" inputmode="numeric"></div>
+          <div class="gefield"><label>Financial Representative (IAC no.)</label><input name="iac" value="1269474" readonly></div>
+          <div class="gefield"><label>Campaign code</label><input name="campaign" value="RS20261462" readonly></div>
+          <div class="gechannels">
+            <div class="gclabel">Preferred contact channel(s) (you may tick more than 1):</div>
+            <div class="gcgrid">
+              <label class="gcbox"><input type="checkbox" class="ch" value="Post">Post</label>
+              <label class="gcbox"><input type="checkbox" class="ch" value="Email">Email</label>
+              <label class="gcbox"><input type="checkbox" class="ch" value="WhatsApp, SMS and other phone-based messages">WhatsApp, SMS and other phone-based messages</label>
+              <label class="gcbox"><input type="checkbox" class="ch" value="Voice calls">Voice calls</label>
+              <label class="gcbox"><input type="checkbox" id="allch">All the above</label>
+            </div>
+          </div>
+          <div class="gedate">Consent date: <b id="cdate">—</b></div>
+          <button class="cont" type="submit">Submit →</button>
+          <div class="geprivacy">
+            <p><b>Your privacy is of utmost importance to us.</b></p>
+            <p>For full details on how your data is collected, used, transferred, and how to manage your marketing preferences, please refer to the Privacy and Security Policy on Great Eastern's website (<a href="https://www.greateasternlife.com/sg/en/privacy-and-security-policy.html" target="_blank" rel="noopener">https://www.greateasternlife.com/sg/en/privacy-and-security-policy.html</a>).</p>
+          </div>
+        </form>
+        <button class="back" data-back>← Back</button>
+      </div>
+
+      <!-- Thank you -->
+      <div class="screen" data-step="5">
+        <div class="done">
+          <div class="big">✓</div>
+          <h2>Thank you! 🐾</h2>
+          <p>We've got your details. A Life Inc consultant will be in touch shortly. Enjoy the roadshow!</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="foot"><b>Life Inc</b> · Great Eastern Financial Advisers · Singapore</div>
+</div>
+
+<script>
+(function(){
+  /* ====== LEAD DESTINATION — set web3Key to go live ======
+     1) create a free key at web3forms.com for the rep's email
+     2) paste it below; every submission is then emailed with ALL fields */
+  var CONFIG={ web3Key:'' };
+
+  var METAQ=4;
+  var data={pet:[],spend:'',funding:'',hasins:'',insco:''};
+  var screens=[].slice.call(document.querySelectorAll('.screen'));
+  var bar=document.getElementById('bar'), pnum=document.getElementById('pnum');
+  var cur=0;
+  function show(i){
+    cur=i;
+    screens.forEach(function(s){s.classList.toggle('active', +s.dataset.step===i);});
+    var pct=Math.min(100,Math.round((i/METAQ)*100)); if(i>=METAQ)pct=100;
+    bar.style.width=Math.max(10,pct)+'%';
+    if(i<METAQ){pnum.textContent='Question '+(i+1)+' of '+METAQ;}
+    else if(i===METAQ){pnum.textContent='Consent & details';}
+    else {pnum.textContent='Done';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.querySelectorAll('[data-single]').forEach(function(grp){
+    var key=grp.dataset.single;
+    grp.addEventListener('click',function(e){
+      var b=e.target.closest('.opt'); if(!b)return;
+      grp.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel');});
+      b.classList.add('sel'); data[key]=b.dataset.v;
+      if(grp.hasAttribute('data-reveal')){
+        var s=document.getElementById('insSub');
+        if(b.dataset.v==='Yes'){s.classList.add('show'); return;}
+        else{s.classList.remove('show'); data.insco='';}
+      }
+      if(key==='insco'){ setTimeout(function(){show(cur+1);},220); return; }
+      if(grp.hasAttribute('data-reveal') && b.dataset.v!=='Yes'){ setTimeout(function(){show(cur+1);},220); return; }
+      if(!grp.hasAttribute('data-reveal')){ setTimeout(function(){show(cur+1);},220); }
+    });
+  });
+  document.querySelectorAll('[data-multi]').forEach(function(grp){
+    var key=grp.dataset.multi;
+    grp.addEventListener('click',function(e){
+      var b=e.target.closest('.opt'); if(!b)return;
+      b.classList.toggle('sel');
+      data[key]=[].slice.call(grp.querySelectorAll('.opt.sel')).map(function(o){return o.dataset.v;});
+      var cont=grp.parentElement.querySelector('[data-next]');
+      if(cont) cont.disabled=data[key].length===0;
+    });
+  });
+  document.querySelectorAll('[data-next]').forEach(function(btn){ btn.addEventListener('click',function(){show(cur+1);}); });
+  document.querySelectorAll('[data-back]').forEach(function(btn){ btn.addEventListener('click',function(){show(Math.max(0,cur-1));}); });
+
+  // consent date — auto, Singapore time (DD/MM/YYYY)
+  (function(){
+    var sg=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Singapore'}));
+    var dd=('0'+sg.getDate()).slice(-2), mm=('0'+(sg.getMonth()+1)).slice(-2);
+    var el=document.getElementById('cdate'); if(el) el.textContent=dd+'/'+mm+'/'+sg.getFullYear();
+  })();
+  // "All the above"
+  var allch=document.getElementById('allch');
+  var chs=[].slice.call(document.querySelectorAll('.ch'));
+  if(allch){
+    allch.addEventListener('change',function(){chs.forEach(function(c){c.checked=allch.checked;});});
+    chs.forEach(function(c){c.addEventListener('change',function(){allch.checked=chs.every(function(x){return x.checked;});});});
+  }
+
+  function sendLead(cb){
+    var p={
+      subject:'New Pet Care Check lead — Life Inc',
+      from_name:'Life Inc · Pet Roadshow',
+      Name:data.name, Email:data.email, Mobile:data.mobile, Home:data.home||'-',
+      'Financial Representative (IAC no.)':data.iac,
+      'Campaign code':data.campaign,
+      'Preferred contact channels':(data.channels||[]).join(', '),
+      'Consent date':data.consentDate,
+      'Submitted (SGT)':data.submittedAt,
+      'Pets owned':(data.pet||[]).join(', '),
+      'Monthly spend':data.spend,
+      'How funded':data.funding,
+      'Has pet insurance':data.hasins,
+      'Current insurer':data.insco||'-'
+    };
+    if(!CONFIG.web3Key){ cb(true); return; }        // not wired yet — just show thank-you
+    p.access_key=CONFIG.web3Key;
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(p)})
+      .then(function(r){return r.json();}).then(function(j){cb(!!j.success);}).catch(function(){cb(false);});
+  }
+
+  document.getElementById('lead').addEventListener('submit',function(e){
+    e.preventDefault();
+    var f=e.target.elements;
+    if(!f.name.value.trim()||!f.email.value.trim()||!f.mobile.value.trim()){alert('Please fill in your name, email and mobile number.');return;}
+    var channels=chs.filter(function(c){return c.checked;}).map(function(c){return c.value;});
+    if(allch&&allch.checked)channels=chs.map(function(c){return c.value;});
+    if(channels.length===0){alert('Please tick at least one preferred contact channel.');return;}
+    data.name=f.name.value.trim();data.email=f.email.value.trim();data.mobile=f.mobile.value.trim();
+    data.home=f.home.value.trim();data.iac=f.iac.value;data.campaign=f.campaign.value;
+    data.channels=channels;data.consentDate=(document.getElementById('cdate')||{}).textContent||'';
+    data.submittedAt=new Date().toLocaleString('en-GB',{timeZone:'Asia/Singapore'});
+    var btn=e.target.querySelector('button[type=submit]'); btn.disabled=true; btn.textContent='Submitting…';
+    sendLead(function(ok){
+      if(ok){ show(5); }
+      else { btn.disabled=false; btn.textContent='Submit →'; alert('Sorry, something went wrong — please try again.'); }
+    });
+  });
+})();
+</script>
+</body></html>
