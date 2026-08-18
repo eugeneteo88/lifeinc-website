@@ -72,6 +72,16 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
 .gefield input{border:none;outline:none;width:100%;font:inherit;font-size:16px;background:transparent;color:var(--ink);padding:2px 0}
 .gefield:focus-within{border-color:var(--red);box-shadow:0 0 0 3px rgba(219,59,52,.12)}
 .gefield input[readonly]{color:#8c8175}
+.iacfield{position:relative}
+.iaclist{position:absolute;left:-1.5px;right:-1.5px;top:calc(100% + 5px);background:#fff;border:1.5px solid var(--line);border-radius:12px;box-shadow:0 10px 28px rgba(42,34,30,.14);max-height:244px;overflow-y:auto;z-index:30;display:none;-webkit-overflow-scrolling:touch}
+.iaclist.open{display:block}
+.iacitem{padding:11px 14px;cursor:pointer;border-bottom:1px solid var(--line);line-height:1.25}
+.iacitem:last-child{border-bottom:none}
+.iacitem.active,.iacitem:active{background:var(--red-soft)}
+.iacitem b{display:block;font-size:15px;color:var(--ink);font-weight:600}
+.iacitem span{font-size:12.5px;color:var(--soft)}
+.iacnone{padding:12px 14px;font-size:13.5px;color:var(--soft)}
+.iacfield.chosen input#iacSearch{color:var(--good);font-weight:600}
 .req{color:var(--red)}
 .gechannels{margin:16px 0 4px}
 .gclabel{font-size:13.5px;color:var(--soft);margin-bottom:11px}
@@ -188,7 +198,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
           <div class="gefield"><label>Email address <span class="req">*</span></label><input name="email" type="email" required></div>
           <div class="gefield"><label>Mobile number <span class="req">*</span></label><input name="mobile" type="tel" inputmode="numeric" required></div>
           <div class="gefield"><label>Home number (optional)</label><input name="home" type="tel" inputmode="numeric"></div>
-          <div class="gefield"><label>Financial Representative (IAC / Name)</label><input name="iac" type="text" value="1269474" placeholder="IAC number or name"></div>
+          <div class="gefield iacfield">
+            <label>Financial Representative (IAC / Name) <span class="req">*</span></label>
+            <input id="iacSearch" type="text" autocomplete="off" placeholder="Type a name or IAC number…" aria-autocomplete="list">
+            <input name="iac" id="iacVal" type="hidden">
+            <div class="iaclist" id="iacList"></div>
+          </div>
           <div class="gefield"><label>Campaign code</label><input name="campaign" value="RS20261518" readonly></div>
           <div class="gechannels">
             <div class="gclabel">Preferred contact channel(s) (you may tick more than 1):</div>
@@ -317,10 +332,56 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
       .then(function(r){return r.json();}).then(function(j){cb(!!j.success);}).catch(function(){cb(false);});
   }
 
+  /* ---- Searchable Financial Representative picker ---- */
+  var REPS=[
+    {c:'1287707',n:'CHONG MAY FAN'},
+    {c:'1267986',n:'KHU CHIN SENG, CRISS'},
+    {c:'1287260',n:'TAN CHOON MAY, VANESSA (CHEN CHUNMEI)'},
+    {c:'1279844',n:'DESMOND SEE JUN LONG'},
+    {c:'1246865',n:'TWANG ZHI KAI TWANG'},
+    {c:'1281229',n:'CHAN YUN HAO'},
+    {c:'1126002',n:'HAN YUN JIA, JOSH'},
+    {c:'1285267',n:'ALFRED SUM JUN HUI'},
+    {c:'1246954',n:'ALEX PENG TENG ZHENG'},
+    {c:'1246997',n:'IRIS PEK GEK CHOO'},
+    {c:'1198658',n:'YIP JIA HAO, DYON'},
+    {c:'1280966',n:'HU JIAYI'},
+    {c:'1247781',n:'LINN, LIN HUI LING'},
+    {c:'1271461',n:'ADELIA TAN XIN CI'}
+  ];
+  (function(){
+    var wrap=document.querySelector('.iacfield'),search=document.getElementById('iacSearch'),
+        val=document.getElementById('iacVal'),list=document.getElementById('iacList'),act=-1,cur=[];
+    function render(q){
+      q=(q||'').trim().toLowerCase();
+      cur=REPS.filter(function(r){return !q||r.n.toLowerCase().indexOf(q)>-1||r.c.indexOf(q)>-1;});
+      act=-1;
+      if(!cur.length){list.innerHTML='<div class="iacnone">No match — check spelling or ask your representative.</div>';list.classList.add('open');return;}
+      list.innerHTML=cur.map(function(r,i){return '<div class="iacitem" data-i="'+i+'"><b>'+r.n+'</b><span>IAC '+r.c+'</span></div>';}).join('');
+      list.classList.add('open');
+    }
+    function pick(r){ val.value=r.c+' — '+r.n; search.value=r.n; wrap.classList.add('chosen'); list.classList.remove('open'); }
+    search.addEventListener('focus',function(){ render(search.value===''||wrap.classList.contains('chosen')?'':search.value); if(wrap.classList.contains('chosen'))render(''); });
+    search.addEventListener('input',function(){ val.value=''; wrap.classList.remove('chosen'); render(search.value); });
+    search.addEventListener('keydown',function(e){
+      if(!list.classList.contains('open'))return;
+      var items=list.querySelectorAll('.iacitem');
+      if(e.key==='ArrowDown'){e.preventDefault();act=Math.min(act+1,items.length-1);}
+      else if(e.key==='ArrowUp'){e.preventDefault();act=Math.max(act-1,0);}
+      else if(e.key==='Enter'){ if(act>-1&&cur[act]){e.preventDefault();pick(cur[act]);} return; }
+      else if(e.key==='Escape'){list.classList.remove('open');return;}
+      else return;
+      items.forEach(function(el,i){el.classList.toggle('active',i===act); if(i===act)el.scrollIntoView({block:'nearest'});});
+    });
+    list.addEventListener('mousedown',function(e){ var it=e.target.closest('.iacitem'); if(it){e.preventDefault();pick(cur[+it.getAttribute('data-i')]);} });
+    document.addEventListener('click',function(e){ if(!wrap.contains(e.target))list.classList.remove('open'); });
+  })();
+
   document.getElementById('lead').addEventListener('submit',function(e){
     e.preventDefault();
     var f=e.target.elements;
     if(!f.name.value.trim()||!f.email.value.trim()||!f.mobile.value.trim()){alert('Please fill in your name, email and mobile number.');return;}
+    if(!f.iac.value){alert('Please select the Financial Representative who invited you.');document.getElementById('iacSearch').focus();return;}
     var channels=chs.filter(function(c){return c.checked;}).map(function(c){return c.value;});
     if(allch&&allch.checked)channels=chs.map(function(c){return c.value;});
     if(channels.length===0){alert('Please tick at least one preferred contact channel.');return;}
