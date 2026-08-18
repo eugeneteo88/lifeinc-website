@@ -188,7 +188,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
           <div class="gefield"><label>Email address <span class="req">*</span></label><input name="email" type="email" required></div>
           <div class="gefield"><label>Mobile number <span class="req">*</span></label><input name="mobile" type="tel" inputmode="numeric" required></div>
           <div class="gefield"><label>Home number (optional)</label><input name="home" type="tel" inputmode="numeric"></div>
-          <div class="gefield"><label>Financial Representative (IAC no.)</label><input name="iac" type="text" value="1269474" placeholder="Rep's IAC number"></div>
+          <div class="gefield"><label>Financial Representative (IAC / Name)</label><input name="iac" type="text" value="1269474" placeholder="IAC number or name"></div>
           <div class="gefield"><label>Campaign code</label><input name="campaign" value="RS20261462" readonly></div>
           <div class="gechannels">
             <div class="gclabel">Preferred contact channel(s) (you may tick more than 1):</div>
@@ -300,7 +300,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
       subject:'New Pet Care Check lead — Life Inc',
       from_name:'Life Inc · Pet Roadshow',
       Name:data.name, Email:data.email, Mobile:data.mobile, Home:data.home||'-',
-      'Financial Representative (IAC no.)':data.iac,
+      'Financial Representative (IAC / Name)':data.iac,
       'Campaign code':data.campaign,
       'Preferred contact channels':(data.channels||[]).join(', '),
       'Consent date':data.consentDate,
