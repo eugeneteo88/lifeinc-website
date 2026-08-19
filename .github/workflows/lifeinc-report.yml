@@ -9,7 +9,7 @@ on:
       to:
         description: 'Recipient for a manual test run (leave as-is to send to yourself; clear it to send to the client)'
         required: false
-        default: 'eugeneteo1988@gmail.com'
+        default: 'eugene@heyada.io'
 
 jobs:
   send:
