@@ -1,0 +1,28 @@
+name: Life Inc weekly SEO report
+
+on:
+  schedule:
+    # Mondays 00:00 UTC = 08:00 SGT — scheduled runs go to the client.
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    inputs:
+      to:
+        description: 'Recipient for a manual test run (leave as-is to send to yourself; clear it to send to the client)'
+        required: false
+        default: 'eugeneteo1988@gmail.com'
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Send Life Inc report via Resend
+        run: node scripts/lifeinc-report.mjs
+        env:
+          GA_KEY_JSON: ${{ secrets.GA_KEY_JSON }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          # Empty on schedule (-> client); set from the input on manual runs (-> yourself).
+          REPORT_TO: ${{ github.event.inputs.to }}
