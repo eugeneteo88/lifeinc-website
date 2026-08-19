@@ -113,31 +113,6 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
 .gatebox .gnote{color:#b3a99d;font-size:11px;margin-top:14px;font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.02em}
 </style></head>
 <body>
-<div id="gate">
-  <div class="gatebox">
-    <div class="glogo">Life <b>Inc</b></div>
-    <p>This page is in review and not yet public.<br>Enter the access code to preview it.</p>
-    <input id="gcode" type="password" inputmode="text" autocomplete="off" placeholder="Access code" autofocus>
-    <button id="gbtn" type="button">View page →</button>
-    <div class="gerr" id="gerr"></div>
-    <div class="gnote">DRC/RS/200826/3</div>
-  </div>
-</div>
-<script>
-(function(){
-  var CODE='lifeinc2026';            /* ← change this to set the preview passcode */
-  var g=document.getElementById('gate');
-  if(sessionStorage.getItem('li_site_ok')==='1'){g.classList.add('hidden');return;}
-  document.body.style.overflow='hidden';
-  function open_(){
-    var v=(document.getElementById('gcode').value||'').trim().toLowerCase();
-    if(v===CODE){sessionStorage.setItem('li_site_ok','1');g.classList.add('hidden');document.body.style.overflow='';}
-    else{document.getElementById('gerr').textContent='Wrong code — check with your Life Inc contact.';}
-  }
-  document.getElementById('gbtn').addEventListener('click',open_);
-  document.getElementById('gcode').addEventListener('keydown',function(e){if(e.key==='Enter')open_();});
-})();
-</script>
 <div class="wrap">
   <div class="card">
 
