@@ -127,11 +127,11 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
 (function(){
   var CODE='lifeinc2026';            /* ← change this to set the preview passcode */
   var g=document.getElementById('gate');
-  if(sessionStorage.getItem('li_pet_ok')==='1'){g.classList.add('hidden');return;}
+  if(sessionStorage.getItem('li_site_ok')==='1'){g.classList.add('hidden');return;}
   document.body.style.overflow='hidden';
   function open_(){
     var v=(document.getElementById('gcode').value||'').trim().toLowerCase();
-    if(v===CODE){sessionStorage.setItem('li_pet_ok','1');g.classList.add('hidden');document.body.style.overflow='';}
+    if(v===CODE){sessionStorage.setItem('li_site_ok','1');g.classList.add('hidden');document.body.style.overflow='';}
     else{document.getElementById('gerr').textContent='Wrong code — check with your Life Inc contact.';}
   }
   document.getElementById('gbtn').addEventListener('click',open_);

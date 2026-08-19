@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="noindex, nofollow">
 <meta name="color-scheme" content="light only">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -184,6 +184,36 @@
 </style>
 </head>
 <body>
+<div id="lgate"><style>
+#lgate{position:fixed;inset:0;z-index:99999;background:#fffdf9;display:flex;align-items:center;justify-content:center;padding:24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+#lgate.hidden{display:none}
+#lgate .gb{width:100%;max-width:340px;text-align:center}
+#lgate .gl{font-weight:800;font-size:32px;letter-spacing:-.02em;color:#2a221e;margin-bottom:12px}
+#lgate .gl b{color:#db3b34}
+#lgate .gp{color:#6b6157;font-size:14px;margin:0 0 18px;line-height:1.55}
+#lgate input{width:100%;font:inherit;font-size:16px;text-align:center;border:2px solid #e7ded2;border-radius:14px;padding:13px 14px;outline:none;margin-bottom:10px;background:#fff;color:#2a221e;-webkit-appearance:none}
+#lgate input:focus{border-color:#db3b34}
+#lgate button{width:100%;font:inherit;font-size:16px;font-weight:700;color:#fff;background:#db3b34;border:none;border-radius:14px;padding:14px;cursor:pointer}
+#lgate .ge{color:#db3b34;font-size:13px;min-height:18px;margin-top:8px}
+</style>
+<div class="gb">
+<div class="gl">Life <b>Inc</b></div>
+<p class="gp">This site is in review and not yet public.<br>Enter the access code to preview it.</p>
+<input id="lgc" type="password" inputmode="text" autocomplete="off" placeholder="Access code" autofocus>
+<button id="lgb" type="button">View site &rarr;</button>
+<div class="ge" id="lge"></div>
+</div>
+<script>
+(function(){var C='lifeinc2026',g=document.getElementById('lgate');
+if(sessionStorage.getItem('li_site_ok')==='1'){g.classList.add('hidden');return;}
+var h=document.documentElement,b=document.body;h.style.overflow='hidden';if(b)b.style.overflow='hidden';
+function o(){var v=(document.getElementById('lgc').value||'').trim().toLowerCase();
+if(v===C){sessionStorage.setItem('li_site_ok','1');g.classList.add('hidden');h.style.overflow='';if(b)b.style.overflow='';}
+else{document.getElementById('lge').textContent='Wrong code — check with your Life Inc contact.';}}
+document.getElementById('lgb').addEventListener('click',o);
+document.getElementById('lgc').addEventListener('keydown',function(e){if(e.key==='Enter')o();});})();
+</script>
+</div>
 
 <header class="nav"><div class="wrap navin">
   <a class="logo" href="/index.html">Life <span class="r">Inc</span></a>
