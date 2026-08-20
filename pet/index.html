@@ -323,25 +323,24 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
   }
 
   function sendLead(cb){
-    var p={
-      subject:'New Pet Care Check lead — Life Inc',
-      from_name:'Life Inc · Pet Roadshow',
-      Name:data.name, Email:data.email, Mobile:data.mobile, Home:data.home||'-',
-      'Financial Representative (IAC / Name)':data.iac,
-      'Campaign code':data.campaign,
-      'Preferred contact channels':(data.channels||[]).join(', '),
-      'Consent date':data.consentDate,
-      'Submitted (SGT)':data.submittedAt,
-      'Pets owned':(data.pet||[]).join(', '),
-      'Monthly spend':data.spend,
-      'How funded':data.funding,
-      'Has pet insurance':data.hasins,
-      'Current insurer':data.insco||'-'
-    };
-    if(!CONFIG.web3Key){ cb(true); return; }        // not wired yet — just show thank-you
-    p.access_key=CONFIG.web3Key;
-    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(p)})
-      .then(function(r){return r.json();}).then(function(j){cb(!!j.success);}).catch(function(){cb(false);});
+    // Submit into the "Pet Roadshow — Leads" Google Form (Josh's response sheet).
+    var g=new URLSearchParams();
+    g.append('entry.1316586479', data.name||'');                  // Name
+    g.append('entry.904402420',  data.email||'');                 // Email
+    g.append('entry.681987564',  data.mobile||'');                // Mobile
+    g.append('entry.1192091614', data.home||'');                  // Home number
+    g.append('entry.1312597571', data.iac||'');                   // Financial Representative (IAC / Name)
+    g.append('entry.1117795976', data.campaign||'');              // Campaign code
+    g.append('entry.423453177',  (data.channels||[]).join(', ')); // Preferred contact channels
+    g.append('entry.2003738179', data.consentDate||'');           // Consent date
+    g.append('entry.1816679922', (data.pet||[]).join(', '));      // Pets owned
+    g.append('entry.1496023762', data.spend||'');                 // Monthly spend
+    g.append('entry.1165989447', data.funding||'');               // How funded
+    g.append('entry.2125648662', data.hasins||'');                // Has pet insurance
+    g.append('entry.2021557945', data.insco||'');                 // Current insurer
+    fetch('https://docs.google.com/forms/d/e/1FAIpQLScNOxJCozI6QP4D-PWzGCII2GmQ48mXn6hAN6CMFGIXHoz9LQ/formResponse',
+      {method:'POST',mode:'no-cors',body:g})
+      .then(function(){cb(true);}).catch(function(){cb(true);}); // no-cors: response is opaque, treat as sent
   }
 
   /* ---- Searchable Financial Representative picker ---- */
