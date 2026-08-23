@@ -254,17 +254,25 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
 <script>
 (function(){
   /* ====== WHERE LEADS GO ======
-     PRIMARY : Josh's "Pet Roadshow — Leads" Google Form. Unchanged — she keeps
-               working from exactly the same sheet.
-     BACKUP  : a second copy at heyada.io, because the Google send uses no-cors and
-               the browser CANNOT see whether Google accepted it. On 19-20 Aug 2026
-               this page was live for ~21 hours wired to nothing, showing everyone
-               "thank you" while their details went nowhere. Never again.
-     LAST DITCH : if both fail, the lead is kept in this device's localStorage and
-               retried on the next page load and the next submission. At a roadshow
-               one rep's phone takes many people in a row, so the queue almost always
-               drains within minutes. */
-  var GFORM='https://docs.google.com/forms/d/e/1FAIpQLScNOxJCozI6QP4D-PWzGCII2GmQ48mXn6hAN6CMFGIXHoz9LQ/formResponse';
+     ONE destination now: heyada.io, which writes each lead straight to Life Inc's own
+     records and shows them at /pet-leads.
+
+     The Google Form was dropped on 23 Aug 2026. It caused every problem this page has
+     had. It could not tell us whether it accepted a submission — the browser has to
+     post with no-cors, so a silent discard and a success look identical. It was edited
+     by people who had no idea a website depended on its internal field codes, and each
+     edit broke the link invisibly: ~21 hours wired to nothing on 19-20 Aug, then ~25
+     leads lost as bare timestamps on the 22nd when a section was added, then every
+     question deleted on the 23rd.
+
+     Removing it removes the whole class of failure. What replaces it answers properly,
+     so a failure is something we KNOW about instead of something we discover weeks
+     later.
+
+     IF IT FAILS : three retries, then the lead is held in this device's localStorage
+     and resent on the next submission, the next page load, and whenever the browser
+     reports it is back online. At a roadshow one phone takes many people in a row, so
+     a lead stranded on person four usually goes out with person five. */
   var BACKUP='https://heyada.io/api/pet-lead';
   var QKEY='li_pet_pending';
 
@@ -337,50 +345,11 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
   function saveQueue(q){ try{ localStorage.setItem(QKEY, JSON.stringify(q.slice(-50))); }catch(e){} }
   function enqueue(lead){ var q=queued(); q.push(lead); saveQueue(q); }
 
-  // Google's formResponse is fire-and-forget: mode:'no-cors' gives an OPAQUE response,
-  // so a 200 and a 400 look identical from here. What we CAN detect is the request
-  // failing to leave the device at all — no signal, DNS gone, connection refused —
-  // and at a roadshow that is precisely the failure that happens.
-  function toGoogle(lead){
-    var g=new URLSearchParams();
-    g.append('entry.1316586479', lead.name||'');                  // Name
-    g.append('entry.904402420',  lead.email||'');                 // Email
-    g.append('entry.681987564',  lead.mobile||'');                // Mobile
-    g.append('entry.1192091614', lead.home||'');                  // Home number
-    g.append('entry.1312597571', lead.iac||'');                   // Financial Representative (IAC / Name)
-    g.append('entry.1117795976', lead.campaign||'');              // Campaign code
-    g.append('entry.423453177',  lead.channels||'');              // Preferred contact channels
-    g.append('entry.2003738179', lead.consentDate||'');           // Consent date
-    g.append('entry.1816679922', lead.pet||'');                   // Pets owned
-    g.append('entry.1496023762', lead.spend||'');                 // Monthly spend
-    g.append('entry.1165989447', lead.funding||'');               // How funded
-    g.append('entry.2125648662', lead.hasins||'');                // Has pet insurance
-    g.append('entry.2021557945', lead.insco||'');                 // Current insurer
-
-    // ---- DO NOT REMOVE: this is what makes the answers actually save ----
-    // The Google Form has a PAGE BREAK ("Untitled Section") before question 1, which
-    // makes it a TWO-page form. Post to a multi-page form without pageHistory and
-    // Google records the submission as page 0 only: you get a row with a timestamp
-    // and every answer column empty, and a 200 back, so nothing looks wrong.
-    //
-    // That is exactly what happened. A section was added to the form at about 18:07
-    // on 22 Aug 2026 and every lead from that moment landed as a bare timestamp —
-    // roughly 25 of them before it was spotted, with the page cheerfully showing
-    // "thank you" each time.
-    //
-    // pageHistory MUST match the form's real page count. If anyone adds or removes a
-    // section on the Google Form, this line has to change with it, and the symptom
-    // will once again be silent blank rows rather than an error.
-    g.append('fvv','1');
-    g.append('pageHistory','0,1');
-
-    return fetch(GFORM,{method:'POST',mode:'no-cors',body:g});
-  }
-
-  // The backup DOES answer properly, so this one we can actually trust.
-  function toBackup(lead, googleOk, attempts){
+  // Unlike the Google Form this answers properly, so success and failure are
+  // distinguishable — which is the entire reason it replaced it.
+  function toBackup(lead, attempts){
     var body={}; for(var k in lead){ if(Object.prototype.hasOwnProperty.call(lead,k)) body[k]=lead[k]; }
-    body.googleOk=googleOk; body.attempts=attempts; body.page=location.href;
+    body.attempts=attempts; body.page=location.href;
     return fetch(BACKUP,{
       method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)
     }).then(function(r){ return r.ok; });
@@ -398,15 +367,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
       });
   }
 
-  // Deliver one lead to both destinations. Resolves with what actually happened so the
-  // caller can decide whether to keep it on the device.
+  // Deliver one lead. Resolves with what actually happened so the caller knows whether
+  // to keep it on the device for another go.
   function deliver(lead){
     var attempts=0;
-    return tryHard(function(){ attempts++; return toGoogle(lead).then(function(){return true;}); },3)
-      .then(function(gOk){
-        return tryHard(function(){ return toBackup(lead,gOk,attempts); },3)
-          .then(function(bOk){ return {google:gOk, backup:bOk}; });
-      });
+    return tryHard(function(){ attempts++; return toBackup(lead,attempts); },3)
+      .then(function(ok){ return {backup:ok}; });
   }
 
   // Drain anything this device is still holding. Runs on load and after each new
@@ -417,7 +383,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
     saveQueue([]);
     q.reduce(function(p,lead){
       return p.then(function(){
-        return deliver(lead).then(function(r){ if(!r.google && !r.backup) enqueue(lead); });
+        return deliver(lead).then(function(r){ if(!r.backup) enqueue(lead); });
       });
     }, Promise.resolve());
   }
@@ -433,7 +399,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
     deliver(lead).then(function(r){
       // Both gone? Keep it here and tell the REP — quietly, so the guest is not alarmed
       // by something that is not their problem and that we are still trying to fix.
-      if(!r.google && !r.backup){ enqueue(lead); cb(true,false); return; }
+      if(!r.backup){ enqueue(lead); cb(true,false); return; }
       cb(true,true);
     });
     flushQueue();
