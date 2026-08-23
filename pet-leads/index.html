@@ -1,0 +1,200 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pet Roadshow Leads — Life Inc</title>
+<!-- Personal data behind a passcode. It must never be indexed, previewed or cached
+     by anything, so this is deliberately stronger than a plain noindex. -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/assets/favicon.svg">
+<style>
+:root{--ink:#2a221e;--soft:#6b615a;--line:#e7e1d8;--bg:#fffdf9;--gold:#a9832a;--good:#1f7a4d;--bad:#b23b3b;--paper:#fff}
+*{box-sizing:border-box}html,body{overflow-x:hidden;max-width:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px 70px}
+.head{padding:42px 0 20px;border-bottom:2px solid var(--ink)}
+.kicker{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:800}
+h1{font-size:32px;line-height:1.12;margin:.28em 0 .2em}
+.head p{color:var(--soft);max-width:62ch;margin:.4em 0 0}
+h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--soft);margin:30px 0 10px;font-weight:800}
+.gate{max-width:400px;margin:48px auto;text-align:center}
+.gate .lock{font-size:40px}
+.gate h2{font-size:21px;text-transform:none;letter-spacing:0;color:var(--ink);margin:10px 0 4px}
+.gate p{color:var(--soft);font-size:14.5px;margin:0 0 16px}
+.gate form{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.gate input{padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font:inherit;min-width:210px;background:#fff}
+.gate button{padding:12px 22px;border:0;background:var(--ink);color:#fff;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+.gate button:disabled{opacity:.55;cursor:default}
+.err{color:var(--bad);font-size:13.5px;min-height:18px;margin-top:10px}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:18px 0}
+.stat div{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.stat b{display:block;font-size:26px;line-height:1.15}
+.stat span{font-size:12.5px;color:var(--soft)}
+.toolrow{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.toolrow input{flex:1;min-width:190px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+.btn{padding:11px 15px;border:1px solid var(--line);background:#fff;border-radius:10px;font:inherit;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--gold)}
+.lead{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:9px}
+.lead .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.lead .nm{font-weight:800;font-size:16.5px}
+.lead .when{font-size:12.5px;color:var(--soft);white-space:nowrap}
+.lead .cts{margin:5px 0 0;font-size:14.5px}
+.lead .cts a{color:var(--gold);text-decoration:none;font-weight:600}
+.lead .meta{margin-top:7px;padding-top:7px;border-top:1px dashed var(--line);font-size:13px;color:var(--soft)}
+.lead .meta b{color:var(--ink);font-weight:700}
+.empty{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:26px 18px;text-align:center;color:var(--soft)}
+.note{background:#fffdf4;border:1.5px solid #f0e2b0;border-radius:12px;padding:13px 16px;font-size:14px;color:#5a4a1e;margin:16px 0}
+.by{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--soft);line-height:1.6}
+.by a{color:var(--gold);font-weight:700;text-decoration:none}
+.by .mark{display:inline-flex;align-items:center;gap:7px;font-weight:800;color:var(--ink);font-size:14px}
+.by .mark svg{width:19px;height:19px}
+</style></head><body>
+
+<div class="wrap">
+
+  <div id="gate" class="gate">
+    <div class="lock">🔒</div>
+    <h2>Pet Roadshow Leads</h2>
+    <p>Enter the passcode to view. Ask Josh or Eugene if you need it.</p>
+    <form id="gf" autocomplete="off">
+      <input id="pc" type="password" placeholder="Passcode" autocomplete="off" autofocus>
+      <button id="go" type="submit">View</button>
+    </form>
+    <div class="err" id="err"></div>
+    <div class="by" style="margin-top:34px;border:0">
+      <span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8.6 11 H23.4 L21.1 27.2 Q20.8 29 18.8 29 H13.2 Q11.2 29 10.9 27.2 Z" fill="#ffd23f" stroke="#22252e" stroke-width="2.4" stroke-linejoin="round"/><path d="M20.4 9 L24.6 3.4" stroke="#22252e" stroke-width="3.2" stroke-linecap="round"/><rect x="6.4" y="6.4" width="19.2" height="5.3" rx="2.6" fill="#5b57d6" stroke="#22252e" stroke-width="2.4"/></svg>HeyAda Studio</span><br>
+      Built and hosted for Life Inc by <a href="https://heyada.io" target="_blank" rel="noopener">HeyAda</a>.
+    </div>
+  </div>
+
+  <div id="app" hidden>
+    <div class="head">
+      <div class="kicker">Life Inc · Pet Roadshow</div>
+      <h1>Your leads</h1>
+      <p>Every submission from the pet care check form, saved the moment it arrives. This is a separate copy from the Google Form — if anything goes wrong at Google's end, everything is still here.</p>
+    </div>
+
+    <div class="stat" id="stats"></div>
+    <div class="note">These are real people's contact details. Please don't forward this link or the passcode outside the team.</div>
+
+    <div class="toolrow">
+      <input id="q" type="search" placeholder="Search name, email, mobile or representative" autocomplete="off">
+      <button class="btn" id="csv">⤓ Download CSV</button>
+      <button class="btn" id="refresh">↻ Refresh</button>
+    </div>
+
+    <div id="list"></div>
+
+    <div class="by">
+      <span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8.6 11 H23.4 L21.1 27.2 Q20.8 29 18.8 29 H13.2 Q11.2 29 10.9 27.2 Z" fill="#ffd23f" stroke="#22252e" stroke-width="2.4" stroke-linejoin="round"/><path d="M20.4 9 L24.6 3.4" stroke="#22252e" stroke-width="3.2" stroke-linecap="round"/><rect x="6.4" y="6.4" width="19.2" height="5.3" rx="2.6" fill="#5b57d6" stroke="#22252e" stroke-width="2.4"/></svg>HeyAda Studio</span><br>
+      This page, the lead form and the backup behind it were built and are hosted for Life Inc by
+      <a href="https://heyada.io" target="_blank" rel="noopener">HeyAda</a> — websites, copy and SEO for Singapore businesses.
+      <br>View only: nothing here can edit or delete a lead, so this stays a clean record.
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var API='https://heyada.io/api/lifeinc-leads-public';
+  var pc='', rows=[], view=[];
+  var gate=document.getElementById('gate'), app=document.getElementById('app'), err=document.getElementById('err');
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function sgt(iso){
+    try{ return new Date(iso).toLocaleString('en-SG',{timeZone:'Asia/Singapore',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false}); }
+    catch(e){ return iso||''; }
+  }
+
+  // The passcode is kept in memory only — never localStorage. A shared device at a
+  // roadshow should not stay unlocked after the tab is closed.
+  function load(code){
+    return fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({passcode:code})})
+      .then(function(r){ return r.json().then(function(j){ if(!r.ok||!j.ok) throw new Error(j.error||('HTTP '+r.status)); return j; }); });
+  }
+
+  document.getElementById('gf').addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('go'), val=document.getElementById('pc').value;
+    if(!val){ err.textContent='Enter the passcode.'; return; }
+    btn.disabled=true; btn.textContent='Checking…'; err.textContent='';
+    load(val).then(function(j){
+      pc=val; rows=j.rows||[];
+      gate.hidden=true; app.hidden=false;
+      render();
+    }).catch(function(ex){
+      err.textContent=ex.message;
+      btn.disabled=false; btn.textContent='View';
+      document.getElementById('pc').select();
+    });
+  });
+
+  function render(){
+    var term=(document.getElementById('q').value||'').trim().toLowerCase();
+    view=rows.filter(function(r){
+      if(!term) return true;
+      return [r.name,r.email,r.mobile,r.rep].join(' ').toLowerCase().indexOf(term)>=0;
+    });
+
+    var today=new Date().toLocaleDateString('en-SG',{timeZone:'Asia/Singapore'});
+    var todays=rows.filter(function(r){
+      try{ return new Date(r.submitted_at).toLocaleDateString('en-SG',{timeZone:'Asia/Singapore'})===today; }catch(e){ return false; }
+    }).length;
+    var reps=new Set(rows.map(function(r){return r.rep;}).filter(Boolean)).size;
+
+    document.getElementById('stats').innerHTML=
+      '<div><b>'+rows.length+'</b><span>leads captured</span></div>'+
+      '<div><b>'+todays+'</b><span>today</span></div>'+
+      '<div><b>'+reps+'</b><span>representatives</span></div>'+
+      '<div><b>'+view.length+'</b><span>shown</span></div>';
+
+    var list=document.getElementById('list');
+    if(!view.length){
+      list.innerHTML='<div class="empty">'+(rows.length?'Nothing matches that search.':'No leads yet — new ones appear here automatically.')+'</div>';
+      return;
+    }
+    list.innerHTML=view.map(function(r){
+      var bits=[];
+      if(r.pets) bits.push('<b>Pets</b> '+esc(r.pets));
+      if(r.monthly_spend) bits.push('<b>Spend</b> '+esc(r.monthly_spend));
+      if(r.funding) bits.push('<b>Funded by</b> '+esc(r.funding));
+      if(r.has_insurance) bits.push('<b>Insured</b> '+esc(r.has_insurance)+(r.insurer?' ('+esc(r.insurer)+')':''));
+      if(r.channels) bits.push('<b>Contact by</b> '+esc(r.channels));
+      if(r.consent_date) bits.push('<b>Consented</b> '+esc(r.consent_date));
+      return '<div class="lead">'+
+        '<div class="top"><span class="nm">'+esc(r.name)+'</span><span class="when">'+sgt(r.submitted_at)+'</span></div>'+
+        '<p class="cts"><a href="tel:'+esc(r.mobile)+'">'+esc(r.mobile)+'</a> · <a href="mailto:'+esc(r.email)+'">'+esc(r.email)+'</a>'+
+          (r.home?' · home '+esc(r.home):'')+'</p>'+
+        '<div class="meta"><b>Representative</b> '+esc(r.rep||'—')+
+          (bits.length?'<br>'+bits.join(' · '):'')+'</div>'+
+      '</div>';
+    }).join('');
+  }
+
+  // Same column order as the Google Form, so a row pastes straight into the sheet.
+  function csv(){
+    var cols=[['submitted_at','Timestamp'],['name','Name'],['email','Email'],['mobile','Mobile'],
+      ['home','Home number'],['rep','Financial Representative (IAC / Name)'],['campaign','Campaign code'],
+      ['channels','Preferred contact channels'],['consent_date','Consent date'],['pets','Pets owned'],
+      ['monthly_spend','Monthly spend'],['funding','How funded'],['has_insurance','Has pet insurance'],
+      ['insurer','Current insurer']];
+    var q=function(v){ v=String(v==null?'':v); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; };
+    var lines=[cols.map(function(c){return q(c[1]);}).join(',')];
+    view.forEach(function(r){ lines.push(cols.map(function(c){ return q(c[0]==='submitted_at'?sgt(r.submitted_at):r[c[0]]); }).join(',')); });
+    var blob=new Blob(['﻿'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download='pet-roadshow-leads.csv'; a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+  }
+
+  document.getElementById('q').addEventListener('input',render);
+  document.getElementById('csv').addEventListener('click',csv);
+  document.getElementById('refresh').addEventListener('click',function(){
+    var b=this; b.disabled=true; b.textContent='…';
+    load(pc).then(function(j){ rows=j.rows||[]; render(); })
+      .catch(function(){})
+      .then(function(){ b.disabled=false; b.textContent='↻ Refresh'; });
+  });
+})();
+</script>
+</body></html>
