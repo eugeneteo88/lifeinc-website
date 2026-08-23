@@ -253,10 +253,20 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
 
 <script>
 (function(){
-  /* ====== LEAD DESTINATION — set web3Key to go live ======
-     1) create a free key at web3forms.com for the rep's email
-     2) paste it below; every submission is then emailed with ALL fields */
-  var CONFIG={ web3Key:'' };
+  /* ====== WHERE LEADS GO ======
+     PRIMARY : Josh's "Pet Roadshow — Leads" Google Form. Unchanged — she keeps
+               working from exactly the same sheet.
+     BACKUP  : a second copy at heyada.io, because the Google send uses no-cors and
+               the browser CANNOT see whether Google accepted it. On 19-20 Aug 2026
+               this page was live for ~21 hours wired to nothing, showing everyone
+               "thank you" while their details went nowhere. Never again.
+     LAST DITCH : if both fail, the lead is kept in this device's localStorage and
+               retried on the next page load and the next submission. At a roadshow
+               one rep's phone takes many people in a row, so the queue almost always
+               drains within minutes. */
+  var GFORM='https://docs.google.com/forms/d/e/1FAIpQLScNOxJCozI6QP4D-PWzGCII2GmQ48mXn6hAN6CMFGIXHoz9LQ/formResponse';
+  var BACKUP='https://heyada.io/api/pet-lead';
+  var QKEY='li_pet_pending';
 
   var METAQ=4;
   var data={pet:[],spend:'',funding:'',hasins:'',insco:''};
@@ -322,25 +332,93 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
     chs.forEach(function(c){c.addEventListener('change',function(){allch.checked=chs.every(function(x){return x.checked;});});});
   }
 
-  function sendLead(cb){
-    // Submit into the "Pet Roadshow — Leads" Google Form (Josh's response sheet).
+  /* ---- the device's own queue: nothing is dropped just because a phone lost signal ---- */
+  function queued(){ try{ return JSON.parse(localStorage.getItem(QKEY)||'[]'); }catch(e){ return []; } }
+  function saveQueue(q){ try{ localStorage.setItem(QKEY, JSON.stringify(q.slice(-50))); }catch(e){} }
+  function enqueue(lead){ var q=queued(); q.push(lead); saveQueue(q); }
+
+  // Google's formResponse is fire-and-forget: mode:'no-cors' gives an OPAQUE response,
+  // so a 200 and a 400 look identical from here. What we CAN detect is the request
+  // failing to leave the device at all — no signal, DNS gone, connection refused —
+  // and at a roadshow that is precisely the failure that happens.
+  function toGoogle(lead){
     var g=new URLSearchParams();
-    g.append('entry.1316586479', data.name||'');                  // Name
-    g.append('entry.904402420',  data.email||'');                 // Email
-    g.append('entry.681987564',  data.mobile||'');                // Mobile
-    g.append('entry.1192091614', data.home||'');                  // Home number
-    g.append('entry.1312597571', data.iac||'');                   // Financial Representative (IAC / Name)
-    g.append('entry.1117795976', data.campaign||'');              // Campaign code
-    g.append('entry.423453177',  (data.channels||[]).join(', ')); // Preferred contact channels
-    g.append('entry.2003738179', data.consentDate||'');           // Consent date
-    g.append('entry.1816679922', (data.pet||[]).join(', '));      // Pets owned
-    g.append('entry.1496023762', data.spend||'');                 // Monthly spend
-    g.append('entry.1165989447', data.funding||'');               // How funded
-    g.append('entry.2125648662', data.hasins||'');                // Has pet insurance
-    g.append('entry.2021557945', data.insco||'');                 // Current insurer
-    fetch('https://docs.google.com/forms/d/e/1FAIpQLScNOxJCozI6QP4D-PWzGCII2GmQ48mXn6hAN6CMFGIXHoz9LQ/formResponse',
-      {method:'POST',mode:'no-cors',body:g})
-      .then(function(){cb(true);}).catch(function(){cb(true);}); // no-cors: response is opaque, treat as sent
+    g.append('entry.1316586479', lead.name||'');                  // Name
+    g.append('entry.904402420',  lead.email||'');                 // Email
+    g.append('entry.681987564',  lead.mobile||'');                // Mobile
+    g.append('entry.1192091614', lead.home||'');                  // Home number
+    g.append('entry.1312597571', lead.iac||'');                   // Financial Representative (IAC / Name)
+    g.append('entry.1117795976', lead.campaign||'');              // Campaign code
+    g.append('entry.423453177',  lead.channels||'');              // Preferred contact channels
+    g.append('entry.2003738179', lead.consentDate||'');           // Consent date
+    g.append('entry.1816679922', lead.pet||'');                   // Pets owned
+    g.append('entry.1496023762', lead.spend||'');                 // Monthly spend
+    g.append('entry.1165989447', lead.funding||'');               // How funded
+    g.append('entry.2125648662', lead.hasins||'');                // Has pet insurance
+    g.append('entry.2021557945', lead.insco||'');                 // Current insurer
+    return fetch(GFORM,{method:'POST',mode:'no-cors',body:g});
+  }
+
+  // The backup DOES answer properly, so this one we can actually trust.
+  function toBackup(lead, googleOk, attempts){
+    var body={}; for(var k in lead){ if(Object.prototype.hasOwnProperty.call(lead,k)) body[k]=lead[k]; }
+    body.googleOk=googleOk; body.attempts=attempts; body.page=location.href;
+    return fetch(BACKUP,{
+      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)
+    }).then(function(r){ return r.ok; });
+  }
+
+  function wait(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
+
+  // Three goes, backing off. A roadshow wifi dropout lasts seconds, not minutes, so a
+  // short retry recovers most of them without keeping anyone standing at the booth.
+  function tryHard(fn, tries){
+    return fn().then(function(v){ return v===false ? Promise.reject(new Error('rejected')) : true; })
+      .catch(function(){
+        if(tries<=1) return false;
+        return wait(700*(4-tries)).then(function(){ return tryHard(fn, tries-1); });
+      });
+  }
+
+  // Deliver one lead to both destinations. Resolves with what actually happened so the
+  // caller can decide whether to keep it on the device.
+  function deliver(lead){
+    var attempts=0;
+    return tryHard(function(){ attempts++; return toGoogle(lead).then(function(){return true;}); },3)
+      .then(function(gOk){
+        return tryHard(function(){ return toBackup(lead,gOk,attempts); },3)
+          .then(function(bOk){ return {google:gOk, backup:bOk}; });
+      });
+  }
+
+  // Drain anything this device is still holding. Runs on load and after each new
+  // submission — one rep's phone handles many people in a row, so a lead stranded by
+  // a dropout on person 4 usually goes out with person 5.
+  function flushQueue(){
+    var q=queued(); if(!q.length) return;
+    saveQueue([]);
+    q.reduce(function(p,lead){
+      return p.then(function(){
+        return deliver(lead).then(function(r){ if(!r.google && !r.backup) enqueue(lead); });
+      });
+    }, Promise.resolve());
+  }
+
+  function sendLead(cb){
+    var lead={
+      name:data.name, email:data.email, mobile:data.mobile, home:data.home,
+      iac:data.iac, campaign:data.campaign,
+      channels:(data.channels||[]).join(', '), consentDate:data.consentDate,
+      pet:(data.pet||[]).join(', '), spend:data.spend, funding:data.funding,
+      hasins:data.hasins, insco:data.insco
+    };
+    deliver(lead).then(function(r){
+      // Both gone? Keep it here and tell the REP — quietly, so the guest is not alarmed
+      // by something that is not their problem and that we are still trying to fix.
+      if(!r.google && !r.backup){ enqueue(lead); cb(true,false); return; }
+      cb(true,true);
+    });
+    flushQueue();
   }
 
   /* ---- Searchable Financial Representative picker ---- */
@@ -389,6 +467,25 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
     document.addEventListener('click',function(e){ if(!wrap.contains(e.target))list.classList.remove('open'); });
   })();
 
+  // Aimed at the REP holding the device, not the guest. The guest still sees a normal
+  // thank-you — their part genuinely is done and nothing they did went wrong. But the
+  // rep needs to know this one has not left the phone yet, so they can keep the guest
+  // a moment or jot the number down. Silence here is what caused the original problem.
+  function showHoldingNotice(){
+    var n=document.createElement('div');
+    n.setAttribute('role','status');
+    n.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:80;background:#8a2f1c;color:#fff;'+
+      'border-radius:12px;padding:11px 14px;font:600 13px/1.45 system-ui,-apple-system,sans-serif;'+
+      'box-shadow:0 6px 20px rgba(42,34,30,.28)';
+    n.innerHTML='⚠️ <b>Rep:</b> no signal — this lead is saved on this device and will send automatically. '+
+                'Keep this tab open, or note the number down.';
+    document.body.appendChild(n);
+  }
+
+  // Anything stranded by an earlier dropout goes out as soon as there is signal again.
+  flushQueue();
+  window.addEventListener('online', flushQueue);
+
   document.getElementById('lead').addEventListener('submit',function(e){
     e.preventDefault();
     var f=e.target.elements;
@@ -402,8 +499,8 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
     data.channels=channels;data.consentDate=(document.getElementById('cdate')||{}).textContent||'';
     data.submittedAt=new Date().toLocaleString('en-GB',{timeZone:'Asia/Singapore'});
     var btn=e.target.querySelector('button[type=submit]'); btn.disabled=true; btn.textContent='Submitting…';
-    sendLead(function(ok){
-      if(ok){ show(5); }
+    sendLead(function(ok,sent){
+      if(ok){ show(5); if(!sent) showHoldingNotice(); }
       else { btn.disabled=false; btn.textContent='Submit →'; alert('Sorry, something went wrong — please try again.'); }
     });
   });
