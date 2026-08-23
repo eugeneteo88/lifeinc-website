@@ -356,6 +356,24 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
     g.append('entry.1165989447', lead.funding||'');               // How funded
     g.append('entry.2125648662', lead.hasins||'');                // Has pet insurance
     g.append('entry.2021557945', lead.insco||'');                 // Current insurer
+
+    // ---- DO NOT REMOVE: this is what makes the answers actually save ----
+    // The Google Form has a PAGE BREAK ("Untitled Section") before question 1, which
+    // makes it a TWO-page form. Post to a multi-page form without pageHistory and
+    // Google records the submission as page 0 only: you get a row with a timestamp
+    // and every answer column empty, and a 200 back, so nothing looks wrong.
+    //
+    // That is exactly what happened. A section was added to the form at about 18:07
+    // on 22 Aug 2026 and every lead from that moment landed as a bare timestamp —
+    // roughly 25 of them before it was spotted, with the page cheerfully showing
+    // "thank you" each time.
+    //
+    // pageHistory MUST match the form's real page count. If anyone adds or removes a
+    // section on the Google Form, this line has to change with it, and the symptom
+    // will once again be silent blank rows rather than an error.
+    g.append('fvv','1');
+    g.append('pageHistory','0,1');
+
     return fetch(GFORM,{method:'POST',mode:'no-cors',body:g});
   }
 
