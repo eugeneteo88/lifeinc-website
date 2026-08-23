@@ -25,6 +25,11 @@ h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--soft
 .gate button{padding:12px 22px;border:0;background:var(--ink);color:#fff;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
 .gate button:disabled{opacity:.55;cursor:default}
 .err{color:var(--bad);font-size:13.5px;min-height:18px;margin-top:10px}
+.live{display:inline-flex;align-items:center;gap:7px;margin-top:16px;font-size:13px;font-weight:700;color:var(--good);background:#eaf5ef;border:1px solid #cfe6da;border-radius:999px;padding:6px 13px}
+.live.warn{color:#8a5a00;background:#fff6e5;border-color:#f0dcb0}
+.live .dot{width:8px;height:8px;border-radius:50%;background:var(--good);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+@media(prefers-reduced-motion:reduce){.live .dot{animation:none}}
 .stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:18px 0}
 .stat div{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .stat b{display:block;font-size:26px;line-height:1.15}
@@ -73,6 +78,7 @@ h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--soft
       <p>Every submission from the pet care check form, saved the moment it arrives. This is a separate copy from the Google Form — if anything goes wrong at Google's end, everything is still here.</p>
     </div>
 
+    <div id="live" class="live"><span class="dot"></span>Live</div>
     <div class="stat" id="stats"></div>
     <div class="note">These are real people's contact details. Please don't forward this link or the passcode outside the team.</div>
 
@@ -122,6 +128,7 @@ h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--soft
       pc=val; rows=j.rows||[];
       gate.hidden=true; app.hidden=false;
       render();
+      if(window.__afterUnlock) window.__afterUnlock();
     }).catch(function(ex){
       err.textContent=ex.message;
       btn.disabled=false; btn.textContent='View';
@@ -189,12 +196,65 @@ h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--soft
 
   document.getElementById('q').addEventListener('input',render);
   document.getElementById('csv').addEventListener('click',csv);
-  document.getElementById('refresh').addEventListener('click',function(){
-    var b=this; b.disabled=true; b.textContent='…';
-    load(pc).then(function(j){ rows=j.rows||[]; render(); })
-      .catch(function(){})
-      .then(function(){ b.disabled=false; b.textContent='↻ Refresh'; });
-  });
+  document.getElementById('refresh').addEventListener('click',function(){ refresh(true); });
+
+  // ---- live updating -------------------------------------------------------------
+  // Roadshow day: a rep should be able to leave this open and watch leads arrive.
+  //
+  // Polling, not websockets, because the whole point of this page is that it is a
+  // dumb, sturdy second copy. Every extra moving part is another thing that can fail
+  // on the day it matters.
+  //
+  // Only polls while the tab is actually being LOOKED at — document.hidden is false.
+  // A phone in a pocket at a booth must not sit there hammering the endpoint all
+  // afternoon; it would flatten the battery and burn quota for nothing.
+  var POLL_MS=30000, timer=null, failures=0;
+
+  function refresh(manual){
+    var btn=document.getElementById('refresh');
+    if(manual){ btn.disabled=true; btn.textContent='…'; }
+    return load(pc).then(function(j){
+      var before=rows.length;
+      rows=j.rows||[];
+      failures=0;
+      render();
+      // Say when it last actually succeeded, not when it last tried. "Live" that
+      // silently stopped being live is worse than no indicator at all.
+      stamp(rows.length-before);
+    }).catch(function(ex){
+      failures++;
+      // A wrong passcode will not fix itself by retrying, so stop and say so.
+      if(/passcode/i.test(ex.message||'')) stop('Session ended — reload the page.');
+      else if(failures>=3) stamp(0,'Not updating — check your connection');
+    }).then(function(){
+      if(manual){ btn.disabled=false; btn.textContent='↻ Refresh'; }
+    });
+  }
+
+  function stamp(added,warn){
+    var el=document.getElementById('live');
+    if(!el) return;
+    var t=new Date().toLocaleTimeString('en-SG',{timeZone:'Asia/Singapore',hour:'2-digit',minute:'2-digit',hour12:false});
+    el.className='live'+(warn?' warn':'');
+    el.innerHTML=warn
+      ? '⚠ '+esc(warn)
+      : '<span class="dot"></span>Live · updated '+t+(added>0?' · <b>'+added+' new</b>':'');
+  }
+
+  function start(){
+    stop();
+    timer=setInterval(function(){ if(!document.hidden) refresh(false); },POLL_MS);
+  }
+  function stop(msg){
+    if(timer){ clearInterval(timer); timer=null; }
+    if(msg) stamp(0,msg);
+  }
+
+  // Coming back to the tab should show current data immediately, not in 30 seconds.
+  document.addEventListener('visibilitychange',function(){ if(!document.hidden) refresh(false); });
+  window.addEventListener('online',function(){ refresh(false); });
+
+  window.__afterUnlock=function(){ stamp(0); start(); };
 })();
 </script>
 </body></html>
