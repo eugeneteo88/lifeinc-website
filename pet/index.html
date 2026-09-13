@@ -116,6 +116,8 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
 <div class="wrap">
   <div class="card">
 
+    <div style="background:#fdecea;border:2px solid #e0796f;border-radius:14px;padding:13px 16px;margin:0 0 16px;color:#8a2a1f;font-size:13.5px;line-height:1.55">⚠️ <b>This form is no longer active.</b> The pet campaign has ended, so anything you enter here is <b>not saved or collected anywhere</b> — not in a database, a spreadsheet or a form. Please don&rsquo;t submit your personal details.</div>
+
     <div class="banner">
       <img class="bimg" src="/assets/lifeinc-pet-banner.png" alt="Life Inc Pet Guardian — happy pets under a protective shield">
       <div class="bover">
@@ -240,9 +242,9 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
       <!-- Thank you -->
       <div class="screen" data-step="5">
         <div class="done">
-          <div class="big">✓</div>
-          <h2>Thank you! 🐾</h2>
-          <p>We've got your details. A Life Inc consultant will be in touch shortly. Enjoy the roadshow!</p>
+          <div class="big">🚫</div>
+          <h2>This form is no longer active</h2>
+          <p>The pet campaign has ended, so this form is closed. <b>Nothing you entered was saved or collected anywhere</b> — no database, no spreadsheet, no form. Sorry for the confusion, and thank you for your interest! 🐾</p>
         </div>
       </div>
 
@@ -472,6 +474,10 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-fo
 
   document.getElementById('lead').addEventListener('submit',function(e){
     e.preventDefault();
+    // Campaign closed: transmit and store NOTHING — go straight to the closed notice.
+    show(5);
+    return;
+    // eslint-disable-next-line no-unreachable
     var f=e.target.elements;
     if(!f.name.value.trim()||!f.email.value.trim()||!f.mobile.value.trim()){alert('Please fill in your name, email and mobile number.');return;}
     if(!f.iac.value){alert('Please select the Financial Representative who invited you.');document.getElementById('iacSearch').focus();return;}
