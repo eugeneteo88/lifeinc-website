@@ -1,500 +1,67 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Pet Care Check · Life Inc</title>
-<meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#fffdf9">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://lifeinc.com.sg/pet">
-<meta property="og:title" content="Free Pet Care Check — Life Inc">
-<meta property="og:description" content="A 40-second check for pet owners — get a personalised pet-care summary from your Life Inc advisers.">
+<meta property="og:title" content="Life Inc — Pet Guardian">
+<meta property="og:description" content="This form is currently not available.">
 <meta property="og:image" content="https://lifeinc.com.sg/assets/og-pet.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Free Pet Care Check — Life Inc">
-<meta name="twitter:description" content="A 40-second check for pet owners.">
-<meta name="twitter:image" content="https://lifeinc.com.sg/assets/og-pet.jpg">
 <style>
-:root{
-  --ink:#2a221e;--soft:#71655d;--line:#efe6da;--bg:#fffdf9;--paper:#fff;
-  --red:#db3b34;--red-d:#b5322b;--red-soft:#fdeadf;--gold:#e0a53a;--good:#2f9e63;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-*{box-sizing:border-box}
-html,body{margin:0;overflow-x:hidden}
-body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
-.wrap{max-width:560px;margin:0 auto;padding:18px 16px 40px;min-height:100vh}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:0 24px 60px -34px rgba(60,40,30,.4);overflow:hidden}
-
-/* --- top banner (illustration + text overlay) --- */
-.banner{position:relative;overflow:hidden;background:#fbeede;line-height:0}
-.bimg{display:block;width:100%;height:auto}
-.bover{position:absolute;top:0;left:0;bottom:0;width:66%;padding:0 18px;display:flex;flex-direction:column;justify-content:center;line-height:1.2;background:linear-gradient(90deg,rgba(252,239,224,.94) 40%,rgba(252,239,224,.42) 60%,transparent 80%)}
-.brow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.blogo{font-weight:800;font-size:clamp(15px,4.6vw,21px);letter-spacing:-.02em;color:var(--ink)}
-.blogo b{color:var(--red)}
-.bbadge{background:var(--red);color:#fff;font-size:clamp(8.5px,2.4vw,11px);font-weight:800;letter-spacing:.04em;padding:4px 9px;border-radius:99px;text-transform:uppercase;white-space:nowrap}
-.bh1{font-size:clamp(14px,4.5vw,22px);font-weight:800;letter-spacing:-.02em;line-height:1.16;margin:8px 0 0;color:var(--ink)}
-.bh1 span{color:var(--red-d)}
-
-.head{padding:14px 22px 12px;border-bottom:1px solid var(--line)}
-.pbar{height:7px;border-radius:99px;background:#f2ebe1;overflow:hidden}
-.pbar > i{display:block;height:100%;width:12%;background:linear-gradient(90deg,var(--red),#f0716a);border-radius:99px;transition:width .35s cubic-bezier(.4,1,.4,1)}
-.pmeta{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);font-weight:600;margin-top:7px}
-.body{padding:24px 22px 26px}
-.q{font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:0 0 4px}
-.qsub{color:var(--soft);font-size:14px;margin:0 0 18px}
-.opts{display:grid;gap:10px}
-.opts.two{grid-template-columns:1fr 1fr}
-.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:15px 16px;font:inherit;font-weight:650;color:var(--ink);cursor:pointer;transition:border-color .14s,background .14s;-webkit-tap-highlight-color:transparent}
-.opt .em{font-size:22px;line-height:1}
-.opt:hover{border-color:#e2d5c4}
-.opt.sel{border-color:var(--red);background:var(--red-soft)}
-.otherin{width:100%;font:inherit;font-size:16px;border:2px solid var(--line);border-radius:14px;padding:14px 16px;color:var(--ink);background:#fff;outline:none}
-.otherin:focus{border-color:var(--red)}
-.opt.sel::after{content:"✓";margin-left:auto;color:var(--red-d);font-weight:900}
-.opts.two .opt{justify-content:center;text-align:center}
-.cont{margin-top:18px;width:100%;border:none;border-radius:14px;background:var(--red);color:#fff;font:inherit;font-weight:800;font-size:16px;padding:15px;cursor:pointer;box-shadow:0 10px 22px -10px rgba(219,59,52,.7);transition:.14s}
-.cont:hover{background:var(--red-d)}
-.cont[disabled]{opacity:.4;cursor:not-allowed;box-shadow:none}
-.back{background:none;border:none;color:var(--soft);font:inherit;font-weight:700;font-size:14px;padding:8px 2px;margin-top:10px;cursor:pointer}
-.back:hover{color:var(--ink)}
-.sub{margin-top:14px;display:none}
-.sub.show{display:block;animation:fade .25s ease}
-@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
-.screen{display:none}.screen.active{display:block;animation:fade .28s ease}
-
-/* --- consent step (our style, GE copy) --- */
-.cintro{margin:0 0 16px}
-.ctitle{font-size:21px;font-weight:800;letter-spacing:-.02em;line-height:1.22;margin:0 0 10px;color:var(--ink)}
-.cintro p{font-size:13.5px;color:var(--soft);margin:0 0 9px;line-height:1.5}
-.cintro p:last-child{margin-bottom:0}
-.gefield{border:1.5px solid var(--line);border-radius:12px;padding:9px 14px;margin-bottom:11px;background:#fff}
-.gefield label{display:block;font-size:12.5px;color:var(--soft);margin-bottom:1px}
-.gefield input{border:none;outline:none;width:100%;font:inherit;font-size:16px;background:transparent;color:var(--ink);padding:2px 0}
-.gefield:focus-within{border-color:var(--red);box-shadow:0 0 0 3px rgba(219,59,52,.12)}
-.gefield input[readonly]{color:#8c8175}
-.iacfield{position:relative}
-.iaclist{position:absolute;left:-1.5px;right:-1.5px;top:calc(100% + 5px);background:#fff;border:1.5px solid var(--line);border-radius:12px;box-shadow:0 10px 28px rgba(42,34,30,.14);max-height:244px;overflow-y:auto;z-index:30;display:none;-webkit-overflow-scrolling:touch}
-.iaclist.open{display:block}
-.iacitem{padding:11px 14px;cursor:pointer;border-bottom:1px solid var(--line);line-height:1.25}
-.iacitem:last-child{border-bottom:none}
-.iacitem.active,.iacitem:active{background:var(--red-soft)}
-.iacitem b{display:block;font-size:15px;color:var(--ink);font-weight:600}
-.iacitem span{font-size:12.5px;color:var(--soft)}
-.iacnone{padding:12px 14px;font-size:13.5px;color:var(--soft)}
-.iacfield.chosen input#iacSearch{color:var(--good);font-weight:600}
-.req{color:var(--red)}
-.gechannels{margin:16px 0 4px}
-.gclabel{font-size:13.5px;color:var(--soft);margin-bottom:11px}
-.gcgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px 14px}
-.gcbox{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:var(--ink);cursor:pointer;line-height:1.35}
-.gcbox input{margin-top:2px;width:18px;height:18px;flex:none;accent-color:var(--red)}
-.gedate{margin:16px 0 4px;font-size:13.5px;color:var(--soft)}
-.gedate b{color:var(--ink);font-weight:700}
-.geprivacy{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
-.geprivacy p{font-size:12px;color:var(--soft);margin:0 0 7px;line-height:1.55}
-.geprivacy a{color:var(--red-d);font-weight:600;word-break:break-word}
-.done{text-align:center;padding:20px 8px 8px}
-.done .big{width:74px;height:74px;border-radius:50%;background:var(--good);color:#fff;display:grid;place-items:center;font-size:38px;margin:8px auto 16px}
-.done h2{font-size:24px;font-weight:800;margin:0 0 8px}
-.done p{color:var(--soft);margin:0 auto;max-width:34ch}
-.foot{text-align:center;color:#b3a99d;font-size:11.5px;margin-top:16px}
-.foot b{color:#8c8175;font-weight:700}
-.codestamp{position:fixed;right:9px;bottom:9px;z-index:60;background:rgba(255,253,249,.94);border:1px solid var(--line);border-radius:8px;padding:4px 9px;font-size:10.5px;letter-spacing:.02em;color:#8c8175;font-weight:700;font-family:ui-monospace,Menlo,Consolas,monospace;pointer-events:none;box-shadow:0 1px 4px rgba(42,34,30,.06)}
-#gate{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px}
-#gate.hidden{display:none}
-.gatebox{width:100%;max-width:340px;text-align:center}
-.gatebox .glogo{font-weight:800;font-size:30px;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px}
-.gatebox .glogo b{color:var(--red)}
-.gatebox p{color:var(--soft);font-size:14px;margin:0 0 16px;line-height:1.5}
-.gatebox input{width:100%;font:inherit;font-size:16px;text-align:center;border:2px solid var(--line);border-radius:14px;padding:13px 14px;outline:none;margin-bottom:10px;background:#fff;color:var(--ink)}
-.gatebox input:focus{border-color:var(--red)}
-.gatebox button{width:100%;font:inherit;font-size:16px;font-weight:700;color:#fff;background:var(--red);border:none;border-radius:14px;padding:13px;cursor:pointer}
-.gatebox .gerr{color:var(--red);font-size:13px;min-height:18px;margin-top:8px}
-.gatebox .gnote{color:#b3a99d;font-size:11px;margin-top:14px;font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.02em}
-</style></head>
+  :root{
+    --ink:#2a221e; --soft:#71655d; --line:#efe6da; --bg:#fffdf9; --paper:#fff;
+    --red:#db3b34; --red-d:#b5322b; --red-soft:#fdeadf;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink);
+    font:16px/1.6 var(--sans); -webkit-font-smoothing:antialiased;
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:22px;
+  }
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:22px;
+    box-shadow:0 24px 60px -34px rgba(60,40,30,.4);
+    max-width:460px; width:100%; overflow:hidden;
+  }
+  .banner{position:relative; line-height:0}
+  .banner img{width:100%; display:block}
+  .badge{
+    position:absolute; top:14px; left:16px;
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--red); color:#fff; font-weight:800; font-size:12.5px; letter-spacing:.02em;
+    padding:5px 12px; border-radius:999px; box-shadow:0 2px 8px rgba(0,0,0,.18);
+  }
+  .body{padding:26px 26px 30px; text-align:center}
+  .logo{font-weight:800; font-size:19px; letter-spacing:-.01em; color:var(--ink); margin-bottom:16px}
+  .logo b{color:var(--red)}
+  .icon{font-size:34px; margin-bottom:6px}
+  h1{font-size:22px; font-weight:800; letter-spacing:-.02em; line-height:1.2; margin-bottom:10px}
+  p{color:var(--soft); font-size:15px; max-width:34ch; margin:0 auto 12px}
+  p b{color:var(--ink)}
+  .note{
+    margin-top:8px; background:var(--red-soft); border-radius:12px;
+    padding:11px 14px; font-size:13px; color:var(--red-d); line-height:1.5;
+  }
+  .foot{margin-top:18px; font-size:12px; color:var(--soft)}
+  .foot a{color:var(--red-d); font-weight:600; text-decoration:none}
+</style>
+</head>
 <body>
-<div class="wrap">
   <div class="card">
-
-    <div style="background:#fdecea;border:2px solid #e0796f;border-radius:14px;padding:13px 16px;margin:0 0 16px;color:#8a2a1f;font-size:13.5px;line-height:1.55">⚠️ <b>This form is no longer active.</b> The pet campaign has ended, so anything you enter here is <b>not saved or collected anywhere</b> — not in a database, a spreadsheet or a form. Please don&rsquo;t submit your personal details.</div>
-
     <div class="banner">
-      <img class="bimg" src="/assets/lifeinc-pet-banner.png" alt="Life Inc Pet Guardian — happy pets under a protective shield">
-      <div class="bover">
-        <div class="brow"><span class="blogo">Life <b>Inc</b></span><span class="bbadge">🐾 Pet Guardian</span></div>
-        <h1 class="bh1">Your pet is <span>family.</span></h1>
-      </div>
+      <img src="/assets/lifeinc-pet-banner.png" alt="Life Inc Pet Guardian — happy pets under a protective shield">
+      <span class="badge">🐾 Pet Guardian</span>
     </div>
-
-    <div class="head">
-      <div class="pbar"><i id="bar"></i></div>
-      <div class="pmeta"><span id="pnum">Question 1 of 4</span><span>~40 seconds</span></div>
-    </div>
-
     <div class="body">
-
-      <!-- Q1 pet type (multi) -->
-      <div class="screen active" data-step="0">
-        <h1 class="q">What pet do you have? 🐾</h1>
-        <p class="qsub">Pick all that apply — many owners have more than one.</p>
-        <div class="opts two" data-multi="pet">
-          <button class="opt" data-v="Dog"><span class="em">🐶</span>Dog</button>
-          <button class="opt" data-v="Cat"><span class="em">🐱</span>Cat</button>
-          <button class="opt" data-v="Rabbit"><span class="em">🐰</span>Rabbit</button>
-          <button class="opt" data-v="Small pet"><span class="em">🐹</span>Small pet</button>
-          <button class="opt" data-v="Bird"><span class="em">🐦</span>Bird</button>
-          <button class="opt" data-v="Fish"><span class="em">🐠</span>Fish</button>
-          <button class="opt" data-v="Reptile"><span class="em">🦎</span>Reptile</button>
-          <button class="opt" data-v="Other"><span class="em">🐾</span>Other</button>
-        </div>
-        <button class="cont" data-next disabled>Continue →</button>
-      </div>
-
-      <!-- Q2 spend -->
-      <div class="screen" data-step="1">
-        <h1 class="q">Roughly how much do you spend on them each month?</h1>
-        <div class="opts" data-single="spend">
-          <button class="opt" data-v="Under $50"><span class="em">💵</span>Under $50</button>
-          <button class="opt" data-v="$50 – $150"><span class="em">💵</span>$50 – $150</button>
-          <button class="opt" data-v="$150 – $300"><span class="em">💰</span>$150 – $300</button>
-          <button class="opt" data-v="$300 – $600"><span class="em">💰</span>$300 – $600</button>
-          <button class="opt" data-v="$600+"><span class="em">🏦</span>$600 or more</button>
-        </div>
-        <button class="back" data-back>← Back</button>
-      </div>
-
-      <!-- Q3 funding -->
-      <div class="screen" data-step="2">
-        <h1 class="q">How do you usually fund these costs?</h1>
-        <div class="opts" data-single="funding">
-          <button class="opt" data-v="Everyday income"><span class="em">💼</span>Everyday income</button>
-          <button class="opt" data-v="Savings"><span class="em">🐖</span>Savings</button>
-          <button class="opt" data-v="Credit card"><span class="em">💳</span>Credit card</button>
-          <button class="opt" data-v="It varies / not sure"><span class="em">🤔</span>It varies / not sure</button>
-        </div>
-        <button class="back" data-back>← Back</button>
-      </div>
-
-      <!-- Q4 insurance -->
-      <div class="screen" data-step="3">
-        <h1 class="q">Do you have pet insurance?</h1>
-        <div class="opts two" data-single="hasins" data-reveal>
-          <button class="opt" data-v="No, not yet"><span class="em">🚫</span>Not yet</button>
-          <button class="opt" data-v="Yes"><span class="em">✅</span>Yes, I do</button>
-        </div>
-        <div class="sub" id="insSub">
-          <p class="qsub" style="margin:16px 0 8px">Which company?</p>
-          <div class="opts two" data-single="insco">
-            <button class="opt" data-v="Income">Income</button>
-            <button class="opt" data-v="MSIG">MSIG</button>
-            <button class="opt" data-v="Liberty">Liberty</button>
-            <button class="opt" data-v="Etiqa">Etiqa</button>
-            <button class="opt" data-v="Other">Other</button>
-            <button class="opt" data-v="Not sure">Not sure</button>
-          </div>
-          <div class="sub" id="otherSub">
-            <input id="otherInput" class="otherin" type="text" placeholder="Type the insurer's name" style="margin-top:10px">
-            <button class="cont" id="otherCont" type="button">Continue →</button>
-          </div>
-        </div>
-        <button class="back" data-back>← Back</button>
-      </div>
-
-      <!-- Consent (our design, GE copy + fields) -->
-      <div class="screen" data-step="4">
-        <div class="cintro">
-          <h1 class="ctitle">Marketing Consent to stay in touch with Great Eastern</h1>
-          <p>Be the first to know about exclusive promotions, offers, customer rewards and/or product offerings from Great Eastern, its related corporations, business partners and our respective Financial Representatives.</p>
-          <p>By submitting this form, you agree to receive marketing updates from us through your preferred contact channel(s).</p>
-        </div>
-        <form id="lead" novalidate>
-          <div class="gefield"><label>Your name <span class="req">*</span> (as in NRIC/Passport)</label><input name="name" type="text" required></div>
-          <div class="gefield"><label>Email address <span class="req">*</span></label><input name="email" type="email" required></div>
-          <div class="gefield"><label>Mobile number <span class="req">*</span></label><input name="mobile" type="tel" inputmode="numeric" required></div>
-          <div class="gefield"><label>Home number (optional)</label><input name="home" type="tel" inputmode="numeric"></div>
-          <div class="gefield iacfield">
-            <label>Financial Representative (IAC / Name) <span class="req">*</span></label>
-            <input id="iacSearch" type="text" autocomplete="off" placeholder="Type a name or IAC number…" aria-autocomplete="list">
-            <input name="iac" id="iacVal" type="hidden">
-            <div class="iaclist" id="iacList"></div>
-          </div>
-          <div class="gefield"><label>Campaign code</label><input name="campaign" value="RS20261518" readonly></div>
-          <div class="gechannels">
-            <div class="gclabel">Preferred contact channel(s) (you may tick more than 1):</div>
-            <div class="gcgrid">
-              <label class="gcbox"><input type="checkbox" class="ch" value="Post">Post</label>
-              <label class="gcbox"><input type="checkbox" class="ch" value="Email">Email</label>
-              <label class="gcbox"><input type="checkbox" class="ch" value="WhatsApp, SMS and other phone-based messages">WhatsApp, SMS and other phone-based messages</label>
-              <label class="gcbox"><input type="checkbox" class="ch" value="Voice calls">Voice calls</label>
-              <label class="gcbox"><input type="checkbox" id="allch">All the above</label>
-            </div>
-          </div>
-          <div class="gedate">Consent date: <b id="cdate">—</b></div>
-          <button class="cont" type="submit">Submit →</button>
-          <div class="geprivacy">
-            <p><b>Your privacy is of utmost importance to us.</b></p>
-            <p>For full details on how your data is collected, used, transferred, and how to manage your marketing preferences, please refer to the Privacy and Security Policy on Great Eastern's website (<a href="https://www.greateasternlife.com/sg/en/privacy-and-security-policy.html" target="_blank" rel="noopener">https://www.greateasternlife.com/sg/en/privacy-and-security-policy.html</a>).</p>
-          </div>
-        </form>
-        <button class="back" data-back>← Back</button>
-      </div>
-
-      <!-- Thank you -->
-      <div class="screen" data-step="5">
-        <div class="done">
-          <div class="big">🚫</div>
-          <h2>This form is no longer active</h2>
-          <p>The pet campaign has ended, so this form is closed. <b>Nothing you entered was saved or collected anywhere</b> — no database, no spreadsheet, no form. Sorry for the confusion, and thank you for your interest! 🐾</p>
-        </div>
-      </div>
-
+      <div class="logo">Life <b>Inc</b></div>
+      <div class="icon">🚧</div>
+      <h1>This form isn&rsquo;t available right now</h1>
+      <p>The Pet Care Check has wrapped up, so it&rsquo;s <b>paused until further notice</b>. Thanks so much for your interest &mdash; do check back another time, or have a chat with your Life&nbsp;Inc consultant.</p>
+      <div class="note">Please don&rsquo;t enter any personal details &mdash; this form is closed, and nothing typed here is saved or collected anywhere.</div>
+      <div class="foot">Life Inc &middot; <a href="https://lifeinc.com.sg">lifeinc.com.sg</a></div>
     </div>
   </div>
-  <div class="foot"><b>Life Inc</b> · Great Eastern Financial Advisers · Singapore</div>
-</div>
-
-<script>
-(function(){
-  /* ====== WHERE LEADS GO ======
-     ONE destination now: heyada.io, which writes each lead straight to Life Inc's own
-     records and shows them at /pet-leads.
-
-     The Google Form was dropped on 23 Aug 2026. It caused every problem this page has
-     had. It could not tell us whether it accepted a submission — the browser has to
-     post with no-cors, so a silent discard and a success look identical. It was edited
-     by people who had no idea a website depended on its internal field codes, and each
-     edit broke the link invisibly: ~21 hours wired to nothing on 19-20 Aug, then ~25
-     leads lost as bare timestamps on the 22nd when a section was added, then every
-     question deleted on the 23rd.
-
-     Removing it removes the whole class of failure. What replaces it answers properly,
-     so a failure is something we KNOW about instead of something we discover weeks
-     later.
-
-     IF IT FAILS : three retries, then the lead is held in this device's localStorage
-     and resent on the next submission, the next page load, and whenever the browser
-     reports it is back online. At a roadshow one phone takes many people in a row, so
-     a lead stranded on person four usually goes out with person five. */
-  var BACKUP='https://heyada.io/api/pet-lead';
-  var QKEY='li_pet_pending';
-
-  var METAQ=4;
-  var data={pet:[],spend:'',funding:'',hasins:'',insco:''};
-  var screens=[].slice.call(document.querySelectorAll('.screen'));
-  var bar=document.getElementById('bar'), pnum=document.getElementById('pnum');
-  var cur=0;
-  function show(i){
-    cur=i;
-    screens.forEach(function(s){s.classList.toggle('active', +s.dataset.step===i);});
-    var pct=Math.min(100,Math.round((i/METAQ)*100)); if(i>=METAQ)pct=100;
-    bar.style.width=Math.max(10,pct)+'%';
-    if(i<METAQ){pnum.textContent='Question '+(i+1)+' of '+METAQ;}
-    else if(i===METAQ){pnum.textContent='Consent & details';}
-    else {pnum.textContent='Done';}
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-  document.querySelectorAll('[data-single]').forEach(function(grp){
-    var key=grp.dataset.single;
-    grp.addEventListener('click',function(e){
-      var b=e.target.closest('.opt'); if(!b)return;
-      grp.querySelectorAll('.opt').forEach(function(o){o.classList.remove('sel');});
-      b.classList.add('sel'); data[key]=b.dataset.v;
-      if(grp.hasAttribute('data-reveal')){
-        var s=document.getElementById('insSub');
-        if(b.dataset.v==='Yes'){s.classList.add('show'); return;}
-        else{s.classList.remove('show'); data.insco='';}
-      }
-      if(key==='insco'){
-        var os=document.getElementById('otherSub');
-        if(b.dataset.v==='Other'){ os.classList.add('show'); var oi=document.getElementById('otherInput'); setTimeout(function(){oi.focus();},60); return; }
-        os.classList.remove('show'); setTimeout(function(){show(cur+1);},220); return;
-      }
-      if(grp.hasAttribute('data-reveal') && b.dataset.v!=='Yes'){ setTimeout(function(){show(cur+1);},220); return; }
-      if(!grp.hasAttribute('data-reveal')){ setTimeout(function(){show(cur+1);},220); }
-    });
-  });
-  document.querySelectorAll('[data-multi]').forEach(function(grp){
-    var key=grp.dataset.multi;
-    grp.addEventListener('click',function(e){
-      var b=e.target.closest('.opt'); if(!b)return;
-      b.classList.toggle('sel');
-      data[key]=[].slice.call(grp.querySelectorAll('.opt.sel')).map(function(o){return o.dataset.v;});
-      var cont=grp.parentElement.querySelector('[data-next]');
-      if(cont) cont.disabled=data[key].length===0;
-    });
-  });
-  document.querySelectorAll('[data-next]').forEach(function(btn){ btn.addEventListener('click',function(){show(cur+1);}); });
-  document.querySelectorAll('[data-back]').forEach(function(btn){ btn.addEventListener('click',function(){show(Math.max(0,cur-1));}); });
-  var oc=document.getElementById('otherCont');
-  if(oc) oc.addEventListener('click',function(){ var v=(document.getElementById('otherInput').value||'').trim(); data.insco=v||'Other'; show(cur+1); });
-
-  // consent date — auto, Singapore time (DD/MM/YYYY)
-  (function(){
-    var sg=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Singapore'}));
-    var dd=('0'+sg.getDate()).slice(-2), mm=('0'+(sg.getMonth()+1)).slice(-2);
-    var el=document.getElementById('cdate'); if(el) el.textContent=dd+'/'+mm+'/'+sg.getFullYear();
-  })();
-  // "All the above"
-  var allch=document.getElementById('allch');
-  var chs=[].slice.call(document.querySelectorAll('.ch'));
-  if(allch){
-    allch.addEventListener('change',function(){chs.forEach(function(c){c.checked=allch.checked;});});
-    chs.forEach(function(c){c.addEventListener('change',function(){allch.checked=chs.every(function(x){return x.checked;});});});
-  }
-
-  /* ---- the device's own queue: nothing is dropped just because a phone lost signal ---- */
-  function queued(){ try{ return JSON.parse(localStorage.getItem(QKEY)||'[]'); }catch(e){ return []; } }
-  function saveQueue(q){ try{ localStorage.setItem(QKEY, JSON.stringify(q.slice(-50))); }catch(e){} }
-  function enqueue(lead){ var q=queued(); q.push(lead); saveQueue(q); }
-
-  // Unlike the Google Form this answers properly, so success and failure are
-  // distinguishable — which is the entire reason it replaced it.
-  function toBackup(lead, attempts){
-    var body={}; for(var k in lead){ if(Object.prototype.hasOwnProperty.call(lead,k)) body[k]=lead[k]; }
-    body.attempts=attempts; body.page=location.href;
-    return fetch(BACKUP,{
-      method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)
-    }).then(function(r){ return r.ok; });
-  }
-
-  function wait(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
-
-  // Three goes, backing off. A roadshow wifi dropout lasts seconds, not minutes, so a
-  // short retry recovers most of them without keeping anyone standing at the booth.
-  function tryHard(fn, tries){
-    return fn().then(function(v){ return v===false ? Promise.reject(new Error('rejected')) : true; })
-      .catch(function(){
-        if(tries<=1) return false;
-        return wait(700*(4-tries)).then(function(){ return tryHard(fn, tries-1); });
-      });
-  }
-
-  // Deliver one lead. Resolves with what actually happened so the caller knows whether
-  // to keep it on the device for another go.
-  function deliver(lead){
-    var attempts=0;
-    return tryHard(function(){ attempts++; return toBackup(lead,attempts); },3)
-      .then(function(ok){ return {backup:ok}; });
-  }
-
-  // Drain anything this device is still holding. Runs on load and after each new
-  // submission — one rep's phone handles many people in a row, so a lead stranded by
-  // a dropout on person 4 usually goes out with person 5.
-  function flushQueue(){
-    var q=queued(); if(!q.length) return;
-    saveQueue([]);
-    q.reduce(function(p,lead){
-      return p.then(function(){
-        return deliver(lead).then(function(r){ if(!r.backup) enqueue(lead); });
-      });
-    }, Promise.resolve());
-  }
-
-  function sendLead(cb){
-    var lead={
-      name:data.name, email:data.email, mobile:data.mobile, home:data.home,
-      iac:data.iac, campaign:data.campaign,
-      channels:(data.channels||[]).join(', '), consentDate:data.consentDate,
-      pet:(data.pet||[]).join(', '), spend:data.spend, funding:data.funding,
-      hasins:data.hasins, insco:data.insco
-    };
-    deliver(lead).then(function(r){
-      // Both gone? Keep it here and tell the REP — quietly, so the guest is not alarmed
-      // by something that is not their problem and that we are still trying to fix.
-      if(!r.backup){ enqueue(lead); cb(true,false); return; }
-      cb(true,true);
-    });
-    flushQueue();
-  }
-
-  /* ---- Searchable Financial Representative picker ---- */
-  var REPS=[
-    {c:'1287707',n:'CHONG MAY FAN'},
-    {c:'1267986',n:'KHU CHIN SENG, CRISS'},
-    {c:'1287260',n:'TAN CHOON MAY, VANESSA (CHEN CHUNMEI)'},
-    {c:'1279844',n:'DESMOND SEE JUN LONG'},
-    {c:'1246865',n:'TWANG ZHI KAI TWANG'},
-    {c:'1281229',n:'CHAN YUN HAO'},
-    {c:'1126002',n:'HAN YUN JIA, JOSH'},
-    {c:'1285267',n:'ALFRED SUM JUN HUI'},
-    {c:'1246954',n:'ALEX PENG TENG ZHENG'},
-    {c:'1246997',n:'IRIS PEK GEK CHOO'},
-    {c:'1198658',n:'YIP JIA HAO, DYON'},
-    {c:'1280966',n:'HU JIAYI'},
-    {c:'1247781',n:'LINN, LIN HUI LING'},
-    {c:'1271461',n:'ADELIA TAN XIN CI'},
-    {c:'1276179',n:'RUSSELL CHUA MING JUN'}
-  ];
-  (function(){
-    var wrap=document.querySelector('.iacfield'),search=document.getElementById('iacSearch'),
-        val=document.getElementById('iacVal'),list=document.getElementById('iacList'),act=-1,cur=[];
-    function render(q){
-      q=(q||'').trim().toLowerCase();
-      cur=REPS.filter(function(r){return !q||r.n.toLowerCase().indexOf(q)>-1||r.c.indexOf(q)>-1;});
-      act=-1;
-      if(!cur.length){list.innerHTML='<div class="iacnone">No match — check spelling or ask your representative.</div>';list.classList.add('open');return;}
-      list.innerHTML=cur.map(function(r,i){return '<div class="iacitem" data-i="'+i+'"><b>'+r.n+'</b><span>IAC '+r.c+'</span></div>';}).join('');
-      list.classList.add('open');
-    }
-    function pick(r){ val.value=r.c+' — '+r.n; search.value=r.n; wrap.classList.add('chosen'); list.classList.remove('open'); }
-    search.addEventListener('focus',function(){ render(search.value===''||wrap.classList.contains('chosen')?'':search.value); if(wrap.classList.contains('chosen'))render(''); });
-    search.addEventListener('input',function(){ val.value=''; wrap.classList.remove('chosen'); render(search.value); });
-    search.addEventListener('keydown',function(e){
-      if(!list.classList.contains('open'))return;
-      var items=list.querySelectorAll('.iacitem');
-      if(e.key==='ArrowDown'){e.preventDefault();act=Math.min(act+1,items.length-1);}
-      else if(e.key==='ArrowUp'){e.preventDefault();act=Math.max(act-1,0);}
-      else if(e.key==='Enter'){ if(act>-1&&cur[act]){e.preventDefault();pick(cur[act]);} return; }
-      else if(e.key==='Escape'){list.classList.remove('open');return;}
-      else return;
-      items.forEach(function(el,i){el.classList.toggle('active',i===act); if(i===act)el.scrollIntoView({block:'nearest'});});
-    });
-    list.addEventListener('mousedown',function(e){ var it=e.target.closest('.iacitem'); if(it){e.preventDefault();pick(cur[+it.getAttribute('data-i')]);} });
-    document.addEventListener('click',function(e){ if(!wrap.contains(e.target))list.classList.remove('open'); });
-  })();
-
-  // Aimed at the REP holding the device, not the guest. The guest still sees a normal
-  // thank-you — their part genuinely is done and nothing they did went wrong. But the
-  // rep needs to know this one has not left the phone yet, so they can keep the guest
-  // a moment or jot the number down. Silence here is what caused the original problem.
-  function showHoldingNotice(){
-    var n=document.createElement('div');
-    n.setAttribute('role','status');
-    n.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:80;background:#8a2f1c;color:#fff;'+
-      'border-radius:12px;padding:11px 14px;font:600 13px/1.45 system-ui,-apple-system,sans-serif;'+
-      'box-shadow:0 6px 20px rgba(42,34,30,.28)';
-    n.innerHTML='⚠️ <b>Rep:</b> no signal — this lead is saved on this device and will send automatically. '+
-                'Keep this tab open, or note the number down.';
-    document.body.appendChild(n);
-  }
-
-  // Anything stranded by an earlier dropout goes out as soon as there is signal again.
-  flushQueue();
-  window.addEventListener('online', flushQueue);
-
-  document.getElementById('lead').addEventListener('submit',function(e){
-    e.preventDefault();
-    // Campaign closed: transmit and store NOTHING — go straight to the closed notice.
-    show(5);
-    return;
-    // eslint-disable-next-line no-unreachable
-    var f=e.target.elements;
-    if(!f.name.value.trim()||!f.email.value.trim()||!f.mobile.value.trim()){alert('Please fill in your name, email and mobile number.');return;}
-    if(!f.iac.value){alert('Please select the Financial Representative who invited you.');document.getElementById('iacSearch').focus();return;}
-    var channels=chs.filter(function(c){return c.checked;}).map(function(c){return c.value;});
-    if(allch&&allch.checked)channels=chs.map(function(c){return c.value;});
-    if(channels.length===0){alert('Please tick at least one preferred contact channel.');return;}
-    data.name=f.name.value.trim();data.email=f.email.value.trim();data.mobile=f.mobile.value.trim();
-    data.home=f.home.value.trim();data.iac=f.iac.value;data.campaign=f.campaign.value;
-    data.channels=channels;data.consentDate=(document.getElementById('cdate')||{}).textContent||'';
-    data.submittedAt=new Date().toLocaleString('en-GB',{timeZone:'Asia/Singapore'});
-    var btn=e.target.querySelector('button[type=submit]'); btn.disabled=true; btn.textContent='Submitting…';
-    sendLead(function(ok,sent){
-      if(ok){ show(5); if(!sent) showHoldingNotice(); }
-      else { btn.disabled=false; btn.textContent='Submit →'; alert('Sorry, something went wrong — please try again.'); }
-    });
-  });
-})();
-</script>
-<div class="codestamp">DRC/RS/200826/3</div>
-</body></html>
+</body>
+</html>
